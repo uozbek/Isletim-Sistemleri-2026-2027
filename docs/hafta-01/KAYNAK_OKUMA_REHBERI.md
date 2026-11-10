@@ -1,6 +1,6 @@
 # 1. hafta · Kaynak okuma rehberi
 
-Kaynak sunum: [PDF](Sunum.pdf), 75 slayt. Kitap: Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf. Kitap tam metni pakete eklenmemiştir.
+Kaynak sunum: 1. Hafta Ders Sunum Dosyası, 75 slayt. Kitap: Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf. Kitap tam metni pakete eklenmemiştir.
 
 PDF sıra sayfası ve basılı sayfa ayrı sütunlardadır. Eşleştirme konu okuması içindir, birebir alıntı/görsel eşleşmesi iddiası taşımaz. Ana ders notu her slayta karşılık gelen özgün açıklamayı içerir.
 
