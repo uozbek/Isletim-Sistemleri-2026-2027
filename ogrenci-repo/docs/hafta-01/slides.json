@@ -1,0 +1,1878 @@
+[
+  {
+    "slide": 1,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 1,
+    "source_slide_label": null,
+    "topic": "Bölüm 1: Giriş",
+    "student_paragraphs": [
+      "Bu hafta, işletim sisteminin bilgisayarda hangi sorumlulukları üstlendiğini inceleyeceğiz. Bir uygulamanın çalışması için işlemci zamanı, bellek ve giriş/çıkış aygıtları gerekir. İşletim sistemi bu kaynaklara erişimi düzenler ve uygulamalara ortak hizmetler sunar. Böylece her uygulamanın disk, klavye veya ağ kartını en baştan yönetmesi gerekmez.",
+      "İlk hafta olduğu için önceki bir konunun işlendiğini varsaymıyoruz. Günlük bilgisayar kullanımından hareket ederek donanım, uygulama ve işletim sistemi arasındaki ilişkiyi kuracağız. Daha sonraki haftalarda göreceğimiz süreç, bellek ve dosya yönetimi bu genel çerçevenin ayrıntılarıdır."
+    ],
+    "short_student_text": "Bu hafta, işletim sisteminin bilgisayarda hangi sorumlulukları üstlendiğini inceleyeceğiz.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "Bölüm 1 giriş ve amaçlar",
+      "pdf_pages": [
+        31,
+        31
+      ],
+      "printed_pages": [
+        3,
+        3
+      ]
+    },
+    "image_sha256": "c81ac076b452b4168d3604475f1b5bc6b432a5045d3a344e9fbb92f0f5d95ef3"
+  },
+  {
+    "slide": 2,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 2,
+    "source_slide_label": "1.2",
+    "topic": "Bölüm 1: Giriş",
+    "student_paragraphs": [
+      "Bu bölümün akışı, bilgisayarın parçalarından başlayıp işletim sisteminin görevlerine doğru ilerliyor. Önce donanımın nasıl birlikte çalıştığını, ardından işlemci, bellek ve aygıtların nasıl paylaştırıldığını inceleyeceğiz. Kesme, sistem çağrısı ve çalışma modu kavramları bu iki düzeyi birbirine bağlayacak.",
+      "Son kısımda aynı ilkelerin masaüstünde, telefonda, sunucuda ve gömülü cihazda neden farklı önceliklerle uygulandığını göreceğiz. Veri yapıları ise işletim sisteminin kaynak bilgilerini bellekte nasıl düzenleyebileceğine giriş sağlayacak. Bu slayt bir yol haritasıdır; başlıklardaki terimleri şimdiden ezberlemek gerekmez."
+    ],
+    "short_student_text": "Bu bölümün akışı, bilgisayarın parçalarından başlayıp işletim sisteminin görevlerine doğru ilerliyor.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "Bölüm 1 giriş ve amaçlar",
+      "pdf_pages": [
+        31,
+        31
+      ],
+      "printed_pages": [
+        3,
+        3
+      ]
+    },
+    "image_sha256": "99468a5f9cf1d5397c9c23469309501b68971811855fe9217d9a7418eb1dc4ed"
+  },
+  {
+    "slide": 3,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 3,
+    "source_slide_label": "1.3",
+    "topic": "Hedefler",
+    "student_paragraphs": [
+      "Haftanın sonunda bir dosya okuma isteğini kullanıcı, uygulama, çekirdek ve donanım düzeylerinde açıklayabilmeniz bekleniyor. Aygıtın işi bitirdiğini nasıl bildirdiğini ve işlemcinin neden bazen çekirdek kodunu yürüttüğünü ilişkilendirebilmelisiniz.",
+      "Ayrıca çok çekirdekli bir makineyle birbirine bağlı birkaç makinenin farkını, sanallaştırmanın neyi paylaştırdığını ve açık kaynak kodun inceleme açısından önemini açıklayabilmelisiniz. Başarı ölçütü yalnızca tanım söylemek değildir: Günlük bir örnekte hangi işletim sistemi görevinin devreye girdiğini gerekçelendirebilmek de gerekir."
+    ],
+    "short_student_text": "Haftanın sonunda bir dosya okuma isteğini kullanıcı, uygulama, çekirdek ve donanım düzeylerinde açıklayabilmeniz bekleniyor.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "Bölüm 1 giriş ve amaçlar",
+      "pdf_pages": [
+        31,
+        31
+      ],
+      "printed_pages": [
+        3,
+        3
+      ]
+    },
+    "image_sha256": "28fdbfbdb246b7a952d354f916f350b54c0c167851e3a7adb068ab7ff012a639"
+  },
+  {
+    "slide": 4,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 4,
+    "source_slide_label": "1.4",
+    "topic": "İşletim Sistemi Terimi Ne Anlama Gelir?",
+    "student_paragraphs": [
+      "Slayttaki farklı nesneler, 'işletim' sözcüğünün günlük dilde bir şeyi çalıştırmak anlamında kullanılabildiğini hatırlatıyor. Ancak bilgisayar bilimindeki işletim sistemi, bir cihazın tamamı ya da onu kullanan her yazılım değildir. Kaynakları yöneten ve programlara hizmet sağlayan sistem yazılımını ifade eder.",
+      "Örneğin otomobildeki bir denetleyici bir işletim sistemi kullanabilir; otomobilin kendisi işletim sistemi değildir. Benzer biçimde derleyici, programı başka bir gösterime çeviren yazılımdır ve genellikle işletim sistemi üzerinde çalışır. Bazı basit gömülü düzenekler ise işletim sistemi olmadan tek bir kontrol programıyla çalışabilir. Bu nedenle her elektronik cihazda mutlaka işletim sistemi bulunduğunu varsaymamalıyız."
+    ],
+    "short_student_text": "Slayttaki farklı nesneler, 'işletim' sözcüğünün günlük dilde bir şeyi çalıştırmak anlamında kullanılabildiğini hatırlatıyor.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "13e3380bfe151e04a1941c556ae8703287a44ccdc3d147801a97cdd32334a3b8"
+  },
+  {
+    "slide": 5,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 5,
+    "source_slide_label": "1.5",
+    "topic": "İşletim Sistemi Nedir?",
+    "student_paragraphs": [
+      "Bir metin düzenleyicide dosya açtığınızda uygulama, depolama aygıtının bütün ayrıntılarını kendisi yönetmez. Dosya sisteminin sunduğu hizmetlerden yararlanır. İşletim sistemi, isteğin yetkili olup olmadığını denetler ve gerekli işlemleri donanım sürücüleriyle birlikte yürütür. Bu aracılık, hem uygulama geliştirmeyi kolaylaştırır hem de kaynakların denetimsiz kullanımını sınırlar.",
+      "İşletim sistemini ortak çalışma alanının yönetimine benzetebiliriz. Masalar ve araçlar donanım kaynakları, bu araçlarla iş yapan kişiler uygulamalar, kullanım kurallarını ve paylaşımı düzenleyen yönetim ise işletim sistemi olsun. Teknik karşılığı şudur: İşletim sistemi hangi sürecin ne kadar işlemci zamanı alacağını, hangi bellek alanlarını kullanacağını ve hangi dosyalara erişebileceğini düzenler.",
+      "Slayttaki üç hedef birbirini tamamlar. Programları çalıştırmak işin yapılmasını, kullanım kolaylığı hizmetlere anlaşılır biçimde ulaşılmasını, verimlilik ise kaynakların gereksiz yere boş kalmamasını amaçlar. Örneğin bir uygulama diskten veri beklerken işlemcinin başka hazır bir uygulamaya verilmesi verimliliği artırabilir. Ancak verimlilik, her durumda işlemciyi yüzde yüz meşgul tutmak anlamına gelmez."
+    ],
+    "short_student_text": "Bir metin düzenleyicide dosya açtığınızda uygulama, depolama aygıtının bütün ayrıntılarını kendisi yönetmez.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "755c554af8f5caab85ea41023e041921ce493848070488db3f3780753b16a60f"
+  },
+  {
+    "slide": 6,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 6,
+    "source_slide_label": "1.6",
+    "topic": "Bilgisayar Sistemi Yapısı",
+    "student_paragraphs": [
+      "Donanım, hesaplamanın fiziksel kaynaklarını sağlar: işlemci komutları yürütür, bellek çalışma verilerini tutar, giriş/çıkış aygıtları çevreyle veri alışverişi yapar. Uygulamalar ise bu kaynakları belirli amaçlarla kullanır; bir tarayıcı sayfa gösterir, bir derleyici kaynak kodu dönüştürür.",
+      "İşletim sistemi, farklı uygulamaların ortak donanımı kullanmasını koordine eder. Örneğin iki uygulamanın aynı bellek alanına denetimsiz biçimde yazmasını engelleyecek mekanizmalar sunar. Kullanıcı katmanı da yalnızca insanlardan oluşmaz; başka bir bilgisayar veya otomatik bir hizmet de sistemden iş isteyebilir. Bu dört bileşeni görevleriyle ayırmak, sonraki katmanlı şekli okumayı kolaylaştırır."
+    ],
+    "short_student_text": "Donanım, hesaplamanın fiziksel kaynaklarını sağlar: işlemci komutları yürütür, bellek çalışma verilerini tutar, giriş/çıkış aygıtları çevreyle veri alışverişi yapar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "d402299050f87aaafc6ffb119c909539a22a2dae8dc3a51ada118c1df25ac004"
+  },
+  {
+    "slide": 7,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 7,
+    "source_slide_label": "1.7",
+    "topic": "Bilgisayar Bileşenlerinin Soyut Görünümü",
+    "student_paragraphs": [
+      "Şekli yukarıdan aşağıya okuyalım. En üstte kullanıcı, onun altında uygulamalar, ardından işletim sistemi ve en altta donanım bulunuyor. Kullanıcı web tarayıcısında bir işlem başlatır. Uygulama, gerekli olduğunda işletim sisteminin sunduğu hizmetleri ister. İşletim sistemi de ilgili donanım kaynağının kullanımını düzenler.",
+      "Katmanlar arasındaki çift yönlü oklar, etkileşimin yalnızca istek göndermekten oluşmadığını gösterir. Sonuçlar ve durum bilgileri de geri döner. Örneğin uygulama bir dosyanın okunmasını ister; işlem tamamlandığında veri veya bir hata bilgisi uygulamaya ulaşır. Bu okları, her komutun mutlaka aynı yoldan tek tek geçtiğini gösteren ayrıntılı bir yürütme çizelgesi olarak yorumlamamalıyız. Şekil, sistemin sorumluluklarını soyutlar.",
+      "Bu ayrım sayesinde aynı tür hizmeti kullanan uygulamalar, farklı donanımlar üzerinde daha az değişiklikle çalışabilir. Donanım farklarının önemli bir bölümü işletim sistemi ve sürücüler tarafından ele alınır. Bununla birlikte şekil, uygulamaların bütün işlemci komutlarının işletim sistemi tarafından tek tek yürütüldüğü anlamına gelmez; kullanıcı kodu izin verilen komutlarını doğrudan işlemcide çalıştırabilir."
+    ],
+    "short_student_text": "Şekli yukarıdan aşağıya okuyalım.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "95b1c21bdd9398133a76bd211be94c96a3a9dfb4bde44bfaa3dbf089a6c123b4"
+  },
+  {
+    "slide": 8,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 8,
+    "source_slide_label": "1.8",
+    "topic": "İşletim Sistemleri Ne İşe Yarar?",
+    "student_paragraphs": [
+      "Bir telefon kullanıcısı dokunmaya hızlı yanıt ve uzun pil ömrü beklerken, paylaşılan bir sunucuyu yöneten kişi birçok isteğin güvenilir biçimde tamamlanmasına önem verir. Aynı kaynak yönetimi ilkeleri kullanılsa da tasarım öncelikleri kullanım ortamına göre değişir.",
+      "Kaynak tahsis edici rolü, işlemci zamanı veya bellek gibi sınırlı kaynakların kimlere verileceğine karar vermektir. Kontrol programı rolü ise programların yürütülmesini ve aygıt erişimini denetlemektir. Örneğin bir süreç gereğinden fazla bellek istediğinde istek reddedilebilir; kaynak isteyen her uygulamaya sınırsız erişim verilmez. Kullanım kolaylığı, performans, enerji ve adalet arasında birlikte değerlendirilmesi gereken tercihler vardır."
+    ],
+    "short_student_text": "Bir telefon kullanıcısı dokunmaya hızlı yanıt ve uzun pil ömrü beklerken, paylaşılan bir sunucuyu yöneten kişi birçok isteğin güvenilir biçimde tamamlanmasına önem verir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "07235627a1a16c4aaf32975f9c710fe37d400a04e418ffa816e5a83a35f575fb"
+  },
+  {
+    "slide": 9,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 9,
+    "source_slide_label": "1.9",
+    "topic": "OS Terimi Birçok Rolü İçerir",
+    "student_paragraphs": [
+      "İşletim sistemi yalnızca masaüstünde gördüğümüz pencere ve simgelerden oluşmaz. Bir endüstriyel denetleyicide ekran olmadan da görev zamanlaması ve aygıt yönetimi yapabilir. Bir oyun cihazında ise benzer kaynak yönetimi, etkileşim ve görüntü üretimi gibi farklı ihtiyaçları destekler.",
+      "Buradaki ortak nokta cihazın dış görünüşü değil, yönetilecek kaynakların ve yürütülecek görevlerin bulunmasıdır. Tarihsel örnekler, farklı ihtiyaçların farklı sistem tasarımları doğurduğunu gösterir. Her ortam için tek bir işletim sistemi mimarisinin en iyi olmasını beklememeliyiz."
+    ],
+    "short_student_text": "İşletim sistemi yalnızca masaüstünde gördüğümüz pencere ve simgelerden oluşmaz.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "83aba78d4b8e004225f51e848fbab083c5f7b7b55a65478afc24d0c84e10ff60"
+  },
+  {
+    "slide": 10,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 10,
+    "source_slide_label": "1.10",
+    "topic": "İşletim Sistemi Tanımı",
+    "student_paragraphs": [
+      "Çekirdek, işletim sisteminin işlemci, bellek ve aygıt erişimi gibi temel işlevlerini sağlayan ayrıcalıklı bölümüdür. Komut yorumlayıcısı veya dosya yönetim aracı gibi sistem programları çekirdeğin dışında çalışabilir. Bir metin düzenleyici ise genel olarak kullanıcı uygulamasıdır. Bu ayrım, bilgisayarla birlikte gelen her yazılımın çekirdek olduğu yanılgısını önler.",
+      "Slayttaki 'her zaman çalışan' ifadesini, işlemcinin sürekli yalnızca çekirdek komutlarını yürüttüğü şeklinde okumamalıyız. Kullanıcı programları çalışırken çekirdeğin kodu ve yönetim yapıları sistemde hazır bulunur; gerekli olaylarda çekirdek yürütmesine geçilir. Ayrıca işletim sistemi paketinin kapsamı ile çekirdeğin kapsamı aynı değildir. Grafik veya çoklu ortam hizmetlerinin bir bölümü kullanıcı alanındaki kütüphane ve hizmetlerle sağlanabilir."
+    ],
+    "short_student_text": "Çekirdek, işletim sisteminin işlemci, bellek ve aygıt erişimi gibi temel işlevlerini sağlayan ayrıcalıklı bölümüdür.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.1 What Operating Systems Do",
+      "pdf_pages": [
+        32,
+        35
+      ],
+      "printed_pages": [
+        4,
+        7
+      ]
+    },
+    "image_sha256": "dcbb2e56366fef4d7e7f457751bdc52607271c750a5faf5a551414179b0930d7"
+  },
+  {
+    "slide": 11,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 11,
+    "source_slide_label": "1.11",
+    "topic": "Bilgisayar Sistem Yapısına Genel Bakış",
+    "student_paragraphs": [
+      "İşletim sisteminin genel rolünü belirledikten sonra donanımın çalışmasına yakından bakacağız. Bir giriş/çıkış isteğinin başlatılması, aygıtın çalışması ve işlemcinin sonuçtan haberdar olması birbirinden ayrı adımlardır. Bu ayrım, kesme ve kaynak paylaşımı konularının temelidir."
+    ],
+    "short_student_text": "İşletim sisteminin genel rolünü belirledikten sonra donanımın çalışmasına yakından bakacağız.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "9f0ee25f49029453a98e6a55f2b9ec88f65818367d1b41d767bc39b647d4e6ce"
+  },
+  {
+    "slide": 12,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 12,
+    "source_slide_label": "1.12",
+    "topic": "Bilgisayar Sistemi Organizasyonu",
+    "student_paragraphs": [
+      "İşlemci ve aygıt denetleyicileri, bellekle veri alışverişi yapabilecek bağlantılar üzerinden bir araya gelir. Denetleyici, belirli aygıtların komutlarını ve aktarımını yöneten donanımdır. Sürücü ise işletim sisteminin o denetleyiciyle çalışmasını sağlayan yazılımdır; ikisi aynı şey değildir.",
+      "İşlemci hesaplama yaparken bir aygıt da veri aktarabilir. Bu eşzamanlı çalışma, bütün bileşenlerin aynı bellek konumuna istediği anda sınırsız erişebildiği anlamına gelmez. Bellek ve bağlantı kapasitesi paylaşılan kaynaklardır; erişimlerin düzenlenmesi gerekir. Ortak veri yolu gösterimi kavramsal bir modeldir, bütün makinelerin fiziksel bağlantıları birebir aynı olmak zorunda değildir."
+    ],
+    "short_student_text": "İşlemci ve aygıt denetleyicileri, bellekle veri alışverişi yapabilecek bağlantılar üzerinden bir araya gelir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "0cdb120502b0824a57bae54298a8d87f5fc886f102a8b9fb99675ab9c149512f"
+  },
+  {
+    "slide": 13,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 13,
+    "source_slide_label": "1.13",
+    "topic": "Bilgisayar Sistemi Çalışması",
+    "student_paragraphs": [
+      "Bir aygıttan veri okunurken ilgili sürücü, denetleyiciye gerekli komutları verir. Denetleyicinin yerel tamponu, aktarım sırasında geçici veri tutabilir. Tamponu, farklı hızlarda çalışan iki taraf arasında kısa süreli bekleme alanı olarak düşünebilirsiniz; teknik görevi aktarımın düzenlenmesine yardımcı olmaktır.",
+      "CPU ile aygıtın aynı anda iş yapabilmesi, yavaş bir aygıtın bütün hesaplamayı durdurmasını önleyebilir. İş tamamlandığında denetleyici kesmeyle işlemciyi bilgilendirebilir. Slayttaki CPU ile veri taşıma anlatımı temel modeli gösterir. İlerideki DMA slaydında, veri bloklarının işlemcinin her baytı ayrı ayrı taşımasına gerek olmadan aktarılabildiğini göreceğiz."
+    ],
+    "short_student_text": "Bir aygıttan veri okunurken ilgili sürücü, denetleyiciye gerekli komutları verir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "20ce5983851e140cd34d9527f6f676a6e4a220c2a9606b984d79400a137fd439"
+  },
+  {
+    "slide": 14,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 14,
+    "source_slide_label": "1.14",
+    "topic": "Kesmelerin Ortak İşlevleri",
+    "student_paragraphs": [
+      "Kesme, işlemcinin yürütmekte olduğu işe ara vererek bir olayı ele almasını sağlayan mekanizmadır. Örneğin bir aygıt aktarımın tamamlandığını bildirebilir. Kesme vektörü, olayın türüne uygun hizmet koduna ulaşmada kullanılan başvuru düzenidir; hangi olaya hangi kodun yanıt vereceğini bulmayı kolaylaştırır.",
+      "Aradan sonra doğru yürütmeye dönebilmek için gerekli işlemci durumu korunmalıdır. İşletim sistemi ve donanımın bu konudaki görev paylaşımı mimariye bağlıdır. Donanımdan gelen kesmeler ile yürütülen komuttan doğan istisnaları ayırmak yararlıdır: sıfıra bölme bir istisna örneğidir. Sistem çağrısı ise hizmet istemek için kontrollü geçiştir; her sistem çağrısı bir yazılım hatası değildir."
+    ],
+    "short_student_text": "Kesme, işlemcinin yürütmekte olduğu işe ara vererek bir olayı ele almasını sağlayan mekanizmadır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "cafb04b87438f1820e58702ee242d3078c15b4330e028d262202254622b6dce2"
+  },
+  {
+    "slide": 15,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 15,
+    "source_slide_label": "1.15",
+    "topic": "Kesme Zaman Çizelgesi",
+    "student_paragraphs": [
+      "Bu şekilde zaman soldan sağa ilerler. Üstteki yeşil çizgi CPU’nun, alttaki çizgi giriş/çıkış aygıtının durumunu gösterir. Çizginin yukarıda veya aşağıda olması performansın arttığını ya da azaldığını ifade etmez. Soldaki açıklamalar hangi seviyenin hangi duruma karşılık geldiğini belirtir: CPU için kullanıcı programı ile kesme işleme; aygıt için boşta olma ile veri aktarımı.",
+      "İlk I/O request noktasında bir giriş/çıkış isteği başlatılır. Aygıt kısa süre sonra veri aktarmaya geçer. Bu sırada üst çizginin kullanıcı programı seviyesinde kalması, işlemcinin aygıtın bütün aktarımı boyunca zorunlu olarak boş beklemediğini gösterir. Buradaki çizim, CPU ile aygıtın çalışmalarının zaman bakımından örtüşebileceği örneği gösterir.",
+      "Transfer done aktarımın bittiği noktadır. Ardından interrupt signaled ile kesme bildirilir. CPU kesmeyi ele aldığında üst çizgi kısa süreliğine kesme işleme seviyesine iner. İşletim sistemi gerekli durum bilgisini işler; interrupt handled sonrasında kullanıcı programının yürütülmesine dönülür. Aktarımın bitmesi, kesmenin bildirilmesi ve kesmenin işlenmesi ayrı olaylardır.",
+      "Bunu çamaşır makinesini çalıştırıp başka iş yapmak gibi düşünebilirsiniz. Makine çalışırken başında sürekli beklemezsiniz; bitiş uyarısı geldiğinde kısa süre ilgilenirsiniz. Teknik karşılığı, aygıtın işlemciyle eşzamanlı çalışabilmesi ve tamamlanma bilgisini kesmeyle bildirmesidir. Şekilde sağda aynı döngü ikinci bir istek için tekrarlanır."
+    ],
+    "short_student_text": "Bu şekilde zaman soldan sağa ilerler.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "47f26ccb7bbcdb2a66f6d8ce09a7ccdb91073b99e3a9e6500f0260d33dfc2578"
+  },
+  {
+    "slide": 16,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 16,
+    "source_slide_label": "1.16",
+    "topic": "Kesme Yönetimi",
+    "student_paragraphs": [
+      "Kesme geldiğinde işlemcinin nereye döneceğini bilmek gerekir. Program sayacı yürütmenin konumunu, kaydediciler ise hesaplamanın o andaki değerlerini taşır. Gerekli durum kaydedilmezse kesme hizmeti tamamlandığında uygulamanın hesabına doğru biçimde devam edilemeyebilir.",
+      "Günlük hayatta okuduğunuz sayfaya ayraç koyup kısa bir telefon görüşmesi yaptıktan sonra aynı yere dönmek buna benzer. Teknik karşılığı yalnızca adresi değil, devam etmek için gereken yürütme durumunu korumaktır. Ardından kesme türü belirlenir, ilgili hizmet yürütülür ve uygun yürütmeye dönülür. Bir kesme işlenmesi her zaman başka bir kullanıcı sürecinin seçileceği anlamına gelmez."
+    ],
+    "short_student_text": "Kesme geldiğinde işlemcinin nereye döneceğini bilmek gerekir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "8e86dde00521b4a286cd004d98e060de05bc2101747f53c82861498f6d0b98c2"
+  },
+  {
+    "slide": 17,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 17,
+    "source_slide_label": "1.17",
+    "topic": "Kesme Sürücü I/O Döngüsü",
+    "student_paragraphs": [
+      "Şekildeki numaralı oklar bir giriş/çıkış işleminin yaşam döngüsünü gösterir. CPU tarafındaki aygıt sürücüsü isteği başlatır; denetleyici aygıta ilişkin işlemi yürütür. Veri aktarımı sürerken işlemci uygun başka komutları yürütebilir. Böylece aygıtın fiziksel çalışma süresi ile CPU’nun hesaplaması örtüşebilir.",
+      "Aktarım hazır olduğunda denetleyici kesme üretir. CPU denetimi kesme hizmet koduna aktarır; hizmet kodu veriyi ve tamamlanma durumunu işler. Ardından kesmeden dönülür ve yürütme sürer. En soldan yukarı uzanan dönüş oku, yeni isteklerde bu döngünün tekrarlandığını gösterir. Okları, bütün kutuların aynı anda çalıştığı şeklinde değil, olaylar arasındaki nedensel sıra olarak izlemek gerekir."
+    ],
+    "short_student_text": "Şekildeki numaralı oklar bir giriş/çıkış işleminin yaşam döngüsünü gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "6dc5f4f71192a0e5a91bd7dfa03bd610b285fa23dffaa214546fa242c717a833"
+  },
+  {
+    "slide": 18,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 18,
+    "source_slide_label": "1.18",
+    "topic": "I/O Yapısı",
+    "student_paragraphs": [
+      "Bir giriş/çıkış isteğinin ardından uygulamanın ne zaman devam edebileceği önemli bir tasarım konusudur. Beklemeli kullanımda ilgili çağrı, işlem tamamlanmadan uygulamaya sonuç döndürmez. Uygulamanın beklemesi, işlemcinin de mutlaka hiçbir iş yapmadan beklemesi demek değildir; işletim sistemi başka hazır bir süreci çalıştırabilir.",
+      "Tamamlanmayı beklemeden dönen bir arayüzde ise istek sürerken uygulama başka işler yapabilir. Sonucun ne zaman hazır olduğunu öğrenmek için ayrıca bir bildirim veya kontrol mekanizması gerekir. Örneğin bir dosya aktarımını başlatıp arayüzü kullanmaya devam etmek bu fikri anlatır. Bu karşılaştırmada çağrının dönüşü ile fiziksel aktarımın bitişini ayrı olaylar olarak düşünmeliyiz."
+    ],
+    "short_student_text": "Bir giriş/çıkış isteğinin ardından uygulamanın ne zaman devam edebileceği önemli bir tasarım konusudur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "025c1b64189d56e61bd18cc6926f2fe24750abccbfabae39c6d1f17d45b710af"
+  },
+  {
+    "slide": 19,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 19,
+    "source_slide_label": "1.19",
+    "topic": "I/O Yapısı (Devam)",
+    "student_paragraphs": [
+      "Bekleme bir döngü içinde aygıt durumunu sürekli sorgulayarak yapılırsa işlemci zamanı tüketilebilir. Bekleyen sürecin uyutulması ise CPU’nun başka işlere ayrılmasına olanak verir. Donanımın bekleme komutu, kullanıcı kodunun sorgulama döngüsü ve işletim sisteminin süreci bekleme durumuna alması aynı mekanizma değildir.",
+      "Slayttaki bir seferde tek istek ifadesi basitleştirilmiş ilk modele ilişkindir; modern işletim sistemleri birçok giriş/çıkış isteğini birlikte yönetebilir. Aygıt durum tablosu, aygıtın kimliği ve durumu gibi yönetim bilgisini tutar. İstek tamamlandığında gelen kesme, bu bilgilerin ve bekleyen işlerin güncellenmesine yardımcı olur. Bu nedenle uygulamanın bekleyip beklememesiyle sistemin eşzamanlı istek kapasitesini karıştırmamalıyız."
+    ],
+    "short_student_text": "Bekleme bir döngü içinde aygıt durumunu sürekli sorgulayarak yapılırsa işlemci zamanı tüketilebilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2 Computer-System Organization; 1.2.1 Interrupts",
+      "pdf_pages": [
+        35,
+        40
+      ],
+      "printed_pages": [
+        7,
+        12
+      ]
+    },
+    "image_sha256": "ff65fca654c2d232f03fb10cd520bec5520c55b6c03440e50217b135e92e090f"
+  },
+  {
+    "slide": 20,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 20,
+    "source_slide_label": "1.20",
+    "topic": "Depolama Yapısı",
+    "student_paragraphs": [
+      "Programların komutları ve verileri nerede tutulur? Depolama bölümünde bu soruyu hız, kapasite ve kalıcılık bakımından inceleyeceğiz. İşlemcinin çalıştığı hızlı alanlarla dosyaları uzun süre tuttuğumuz alanların farklı olması, bellek yönetimi ve önbellekleme ihtiyacını doğurur."
+    ],
+    "short_student_text": "Programların komutları ve verileri nerede tutulur? Depolama bölümünde bu soruyu hız, kapasite ve kalıcılık bakımından inceleyeceğiz.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "1af7ae29b52707a2e04fb6196ea615d0c73b72a1c1e40c3664bbe5e2341bcf81"
+  },
+  {
+    "slide": 21,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 21,
+    "source_slide_label": "1.21",
+    "topic": "Depolama Yapısı",
+    "student_paragraphs": [
+      "Ana bellek, yürütülen programların komut ve verilerinin tutulduğu çalışma alanıdır. Geleneksel DRAM, elektrik kesildiğinde içeriğini korumaz; bu nedenle uçucu olarak adlandırılır. İkincil depolama ise dosyaları daha kalıcı ve genellikle daha büyük bir alanda tutar.",
+      "Bir çalışma masasını RAM’e, dolabı diske benzetebiliriz. Üzerinde çalışacağınız belgeleri masaya alırsınız; bütün arşivi masada tutmak hem pahalı hem gereksizdir. Teknik karşılığı, gereken veri ve komutların çalışmaya uygun bellek alanlarına taşınmasıdır. Ana bellek, kaydedici ve önbelleklerden farklıdır; işlemcinin eriştiği tek depolama türü olduğu anlamına gelmez."
+    ],
+    "short_student_text": "Ana bellek, yürütülen programların komut ve verilerinin tutulduğu çalışma alanıdır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "53e2440ad5df94785f8dd8a4bd4af47eebd2f8d35cb2a39c2b01d354a8967c58"
+  },
+  {
+    "slide": 22,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 22,
+    "source_slide_label": "1.22",
+    "topic": "Depolama Yapısı (Devam)",
+    "student_paragraphs": [
+      "HDD, veriyi dönen plakalar üzerinde manyetik olarak tutar. Veriye ulaşma süresi yalnızca elektronik aktarım hızına değil, mekanik konumlanmaya da bağlıdır. İz ve sektörler, bu yüzeyin veriyi düzenlemek için kullanılan kavramlarıdır.",
+      "NVM, güç kesildiğinde veriyi koruyan bellek teknolojileri için genel bir addır. SSD’lerde yaygın olarak kullanılan flash bellek bunun bir örneğidir; her NVM aynı hızda ve aynı yapıda değildir. İşletim sistemi farklı aygıtları ortak okuma/yazma arayüzleriyle sunabilir, fakat gecikme ve erişim özellikleri performansı etkilemeye devam eder. Sunumdaki teknoloji karşılaştırmaları döneminin genel çerçevesidir; kesin hızları bütün aygıtlara genellememeliyiz."
+    ],
+    "short_student_text": "HDD, veriyi dönen plakalar üzerinde manyetik olarak tutar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "e2efd5d4171f3256d467632be97921044afac11c5adcdf538535cd39ba72e0a2"
+  },
+  {
+    "slide": 23,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 23,
+    "source_slide_label": "1.23",
+    "topic": "Depolama Tanımları ve Notasyon",
+    "student_paragraphs": [
+      "Bit, iki farklı durumu temsil eden temel bilgi birimidir. Bu durumlar genellikle 0 ve 1 ile gösterilir. Birden fazla bit birlikte kullanıldığında daha fazla farklı örüntü üretilebilir: iki bit 00, 01, 10 ve 11 olmak üzere dört olasılık sağlar.",
+      "n bit, 2 üzeri n farklı örüntüyü ayırt edebilir. Sekiz bitte 256 olasılık vardır; bu doğrudan '256 harf' demek değildir. Örüntünün sayı, karakter, renk veya komut olarak yorumlanmasını kullanılan kodlama belirler. Aynı bit dizisinin farklı anlamlar taşıyabilmesi, verinin gösterimi ile anlamı arasındaki ayrımı ortaya koyar."
+    ],
+    "short_student_text": "Bit, iki farklı durumu temsil eden temel bilgi birimidir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "d7a144444c450f6b635c1a651f3902d3a5c267808c7d99b1aefff9b059fb1919"
+  },
+  {
+    "slide": 24,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 24,
+    "source_slide_label": "1.24",
+    "topic": "Depolama Tanımları ve Notasyon",
+    "student_paragraphs": [
+      "Bayt, sekiz bitten oluşur. Örneğin 16 bitlik bir veri iki bayt yer kaplar. Bit ile baytı ayırmak, depolama kapasitesi ve veri hızı hesaplarında önemlidir. b ve B gösterimleri karşılaştığınız birimin bit mi bayt mı olduğunu ayırt etmenize yardımcı olabilir.",
+      "Kelime boyutu işlemci mimarisinin doğal veri işleme düzeniyle ilişkilidir; her makine ve arayüzde aynı büyüklüğü ifade etmez. Slayttaki 64 bit için sekiz bayt hesabı bu ilişkiyi örnekler. Bununla birlikte 64 bitlik bir sistemde bütün değişkenler sekiz bayt değildir; değişkenin veri türü önemlidir. Ayrıca bayt düzeyinde adreslenebilen bir sistemde bazı bit işlemleri yapılabilmesi de mümkündür."
+    ],
+    "short_student_text": "Bayt, sekiz bitten oluşur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "8cd2b987af569fe8f5a3310aeb754540f2acf2c8b7c93242c989f92ce246e8ba"
+  },
+  {
+    "slide": 25,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 25,
+    "source_slide_label": "1.25",
+    "topic": "Depolama Tanımları ve Notasyon",
+    "student_paragraphs": [
+      "Slayt, ikili katları tarihsel KB/MB/GB yazımıyla gösteriyor. Birimleri kesin kullanmak için iki gösterimi ayıralım: 1 kB 1000 bayt, 1 KiB 1024 bayttır. Benzer biçimde 1 GB 1000 üzeri 3 bayt, 1 GiB 1024 üzeri 3 bayttır. İkili ve ondalık hesap farklı sayılar verir.",
+      "Örneğin 4096 bayt, 4 KiB eder; ondalık gösterimde 4,096 kB’dır. Kapasiteyi karşılaştırırken ekranda yazan etiket kadar hesabın hangi tabana göre yapıldığını da kontrol etmeliyiz. Kaynak slayt değiştirilmeden korunmuştur; buradaki açıklama, slayttaki yaygın eski kullanım ile kesin birim adlandırmasını birbirinden ayırır."
+    ],
+    "short_student_text": "Slayt, ikili katları tarihsel KB/MB/GB yazımıyla gösteriyor.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "be9a639d51689709ec04deff127cdc7383eefddb6a3cd36f29e418e151772353"
+  },
+  {
+    "slide": 26,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 26,
+    "source_slide_label": "1.26",
+    "topic": "Depolama Hiyerarşisi",
+    "student_paragraphs": [
+      "Depolama hiyerarşisi, tek bir teknolojinin bütün ihtiyaçları karşılayamamasından doğar. Çok hızlı alanların kapasitesi genellikle daha sınırlı ve birim kapasite maliyeti daha yüksektir. Daha büyük ve kalıcı alanlara erişim ise çoğu zaman daha uzun sürer.",
+      "Önbelleğe alma, sık gerekeceği düşünülen bilginin bir kopyasını daha hızlı bir düzeyde tutar. Amaç her erişimde daha yavaş düzeye gitmeyi azaltmaktır. Ana belleğin disk verileri için kullanılması ile işlemci önbelleğinin RAM verilerini tutması aynı genel ilkenin farklı örnekleridir. Sürücü, aygıtla iletişimi düzenleyen yazılım olarak bu hiyerarşinin özellikle giriş/çıkış tarafında rol oynar."
+    ],
+    "short_student_text": "Depolama hiyerarşisi, tek bir teknolojinin bütün ihtiyaçları karşılayamamasından doğar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "231908e6bd5f6d59c3e6792d49d8c7fa7898379435dcc062870f7a24d9ea9770"
+  },
+  {
+    "slide": 27,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 27,
+    "source_slide_label": "1.27",
+    "topic": "Depolama - Aygıt Hiyerarşisi",
+    "student_paragraphs": [
+      "Şeklin tepesinde kaydediciler, altında önbellek ve ana bellek; daha aşağıda kalıcı depolama türleri bulunur. Soldaki kapasite yönü aşağıya doğru daha büyük alanları, sağdaki erişim süresi yönü aşağıya doğru daha uzun beklemeleri gösterir. Dolayısıyla 'erişim süresinin artması', erişimin hızlanması anlamına gelmez.",
+      "Kesikli yatay çizgi, şekilde uçucu ve uçucu olmayan alanlar arasındaki ayrımı vurgular. Üstteki küçük ve hızlı alanlar hesaplama sırasında sık kullanılır; alttaki daha büyük alanlar kalıcı veri tutmaya uygundur. Bu bir genel eğilim modelidir, bütün aygıt türlerinin kesin kapasite sıralaması değildir. İşletim sistemi ve donanım, gerekli veriyi düzeyler arasında taşıyarak hız ile kapasiteyi birlikte kullanır."
+    ],
+    "short_student_text": "Şeklin tepesinde kaydediciler, altında önbellek ve ana bellek; daha aşağıda kalıcı depolama türleri bulunur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.2 Storage Structure",
+      "pdf_pages": [
+        39,
+        42
+      ],
+      "printed_pages": [
+        11,
+        14
+      ]
+    },
+    "image_sha256": "76ae54e21cbff1ca276ca3655ceb741b2a6589d393d211707932783c7bc5e34d"
+  },
+  {
+    "slide": 28,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 28,
+    "source_slide_label": "1.28",
+    "topic": "Modern Bir Bilgisayar Nasıl Çalışır?",
+    "student_paragraphs": [
+      "Şekilde bellek hem komutları hem verileri tutar. CPU, yürütme döngüsünde komutu bellek hiyerarşisinden alır, yorumlar ve yürütür. CPU ile bellek arasındaki instruction execution cycle ve data movement okları, komut alma ile veri alışverişinin ayrı rollerini gösterir.",
+      "Aygıta giden I/O request oku isteği, CPU’ya yönelen interrupt oku aygıtın bildirimini temsil eder. Aygıtla bellek arasındaki DMA bağlantısı ise veri bloklarının doğrudan aktarım yolunu vurgular. Böylece aynı resimde komut yürütme, aygıt kontrolü ve veri aktarımı ayrılır. CPU isteği başlatıp tamamlanmayı ele alabilir; her baytı kendi komutlarıyla taşıması zorunlu değildir."
+    ],
+    "short_student_text": "Şekilde bellek hem komutları hem verileri tutar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.3 I/O Structure",
+      "pdf_pages": [
+        42,
+        42
+      ],
+      "printed_pages": [
+        14,
+        14
+      ]
+    },
+    "image_sha256": "392364e59d51dc188fc6fbecf1806e0192e5e5256d4ad83c738b4ecd28140bb5"
+  },
+  {
+    "slide": 29,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 29,
+    "source_slide_label": "1.29",
+    "topic": "Doğrudan Bellek Erişim Yapısı",
+    "student_paragraphs": [
+      "DMA, doğrudan bellek erişimi anlamına gelir. İşlemci veya sürücü aktarımın adresi ve miktarı gibi bilgileri ayarlar; uygun donanım veri bloğunu aygıt ile ana bellek arasında taşır. İşlemcinin her bayt için ayrı bir kopyalama döngüsü yürütmesine gerek kalmaması, CPU yükünü azaltabilir.",
+      "Bir taşınmada her kutuyu yöneticinin taşıması yerine taşıma ekibine başlangıç ve hedefi bildirmesine benzetebiliriz. Teknik karşılığı, aktarım işinin uygun denetleyiciye verilmesidir. Bu, işletim sisteminin hiç katılmadığı veya aktarımın mutlaka RAM hızında gerçekleştiği anlamına gelmez. Başlatma, erişim izinleri, tamamlanma ve hata yönetimi hâlâ gereklidir; gerçek hız aygıta ve bağlantıya bağlıdır."
+    ],
+    "short_student_text": "DMA, doğrudan bellek erişimi anlamına gelir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.2.3 I/O Structure",
+      "pdf_pages": [
+        42,
+        42
+      ],
+      "printed_pages": [
+        14,
+        14
+      ]
+    },
+    "image_sha256": "6290849c59bed1bc75e2bcd255c6ed6e28247acdecb26e42e3dafbf8fff21358"
+  },
+  {
+    "slide": 30,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 30,
+    "source_slide_label": "1.30",
+    "topic": "İşletim Sistemi İşlemleri",
+    "student_paragraphs": [
+      "Bilgisayar açıldığında henüz kullanıcı uygulamaları çalışmıyorken başlangıç kodu donanımı hazırlar ve çekirdeğin yüklenmesini başlatır. Önyükleme zincirinin ayrıntıları sisteme göre değişir; temel amaç işletim sistemini çalışabilecek duruma getirmektir. Daha sonra gerekli sistem hizmetleri başlatılır. Arka planda çalışan hizmetler için daemon terimiyle karşılaşabilirsiniz.",
+      "Çekirdek, aygıt kesmeleri, istisnalar ve hizmet istekleri gibi olaylara yanıt verir. Bir donanım kesmesi dış aygıttan gelebilirken sıfıra bölme yürütülen komuttan doğar. Sistem çağrısı ise uygulamanın bilinçli hizmet talebidir. Sonsuz döngüye giren bir uygulamanın denetimi sonsuza kadar elinde tutmaması için ileride göreceğimiz zamanlayıcı mekanizması gerekir."
+    ],
+    "short_student_text": "Bilgisayar açıldığında henüz kullanıcı uygulamaları çalışmıyorken başlangıç kodu donanımı hazırlar ve çekirdeğin yüklenmesini başlatır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4 Operating-System Operations",
+      "pdf_pages": [
+        49,
+        51
+      ],
+      "printed_pages": [
+        21,
+        23
+      ]
+    },
+    "image_sha256": "d8fa0aa2d9673614fbe6c3792848c42a0103b616dcaaf2b77093827b701af507"
+  },
+  {
+    "slide": 31,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 31,
+    "source_slide_label": "1.31",
+    "topic": "Çoklu Programlama (Toplu iş sistemi -",
+    "student_paragraphs": [
+      "Tek bir program diskten veri beklediğinde işlemci boş kalabilir. Çoklu programlama, bellekte birden fazla işi hazır tutup biri beklemeye geçtiğinde diğerini çalıştırarak bu boşluğu azaltır. Temel amaç, yapılabilecek iş varken CPU’nun gereksiz yere beklememesidir.",
+      "Bir aşçının fırındaki yemeğin pişmesini beklerken salata hazırlaması benzer bir durumdur. Teknik olarak CPU, giriş/çıkış bekleyen sürecin yerine çalışmaya hazır başka bir süreci yürütür. Tek çekirdekte iki sürecin aynı anda komut yürütmesi gerekmez; zamanları iç içe geçebilir. Burada birden fazla programın sistemde bulunmasıyla gerçek donanım paralelliğini ayırmalıyız."
+    ],
+    "short_student_text": "Tek bir program diskten veri beklediğinde işlemci boş kalabilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.1 Multiprogramming and Multitasking",
+      "pdf_pages": [
+        51,
+        52
+      ],
+      "printed_pages": [
+        23,
+        24
+      ]
+    },
+    "image_sha256": "970117772498fc34ef58ed50f6ee93b63ff3fb42be1e23eb92343545799c27c7"
+  },
+  {
+    "slide": 32,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 32,
+    "source_slide_label": "1.32",
+    "topic": "Çoklu Görev (Zaman Paylaşımı)",
+    "student_paragraphs": [
+      "Zaman paylaşımında işlemci, yalnızca bir iş giriş/çıkış beklediğinde değil, belirli aralıklarla da başka hazır işlere verilebilir. Kısa süreli geçişler, kullanıcıların birden fazla uygulamayla etkileşim kurabilmesini sağlar. Bir uygulama yoğun hesaplama yaparken diğerinin klavye veya ekran isteğinin uzun süre beklememesi amaçlanır.",
+      "Slayttaki bir saniyenin altındaki yanıt ifadesi etkileşim için örnek bir hedef olarak okunmalıdır; bütün sistemler için tek ve değişmez sınır değildir. Sanal bellek de her sürecin bütün parçalarının aynı anda fiziksel bellekte bulunmasını zorunlu kılmadan yürütmeyi destekler. Süreç zamanlaması CPU paylaşımıyla, sanal bellek ise adres alanı ve fiziksel bellek yönetimiyle ilgilidir. İkisi birlikte çalışır ama aynı mekanizma değildir."
+    ],
+    "short_student_text": "Zaman paylaşımında işlemci, yalnızca bir iş giriş/çıkış beklediğinde değil, belirli aralıklarla da başka hazır işlere verilebilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.1 Multiprogramming and Multitasking",
+      "pdf_pages": [
+        51,
+        52
+      ],
+      "printed_pages": [
+        23,
+        24
+      ]
+    },
+    "image_sha256": "a61d30b6ac6818543676b8c4cbcdcbeb0558f6451eec2da9bcb282d7de4029ae"
+  },
+  {
+    "slide": 33,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 33,
+    "source_slide_label": "1.33",
+    "topic": "Çok Programlı Sistem için Bellek Düzeni",
+    "student_paragraphs": [
+      "Dikey şekil, belleğin adreslerle düzenlenen bir alan olduğunu gösterir. Altta 0, üstte max etiketi vardır. İşletim sistemi ve birden fazla süreç için ayrılmış bölgeler gösterilmiştir. Süreç 1, 2, 3 ve 4’ün bellekte bulunması, CPU’nun hepsini aynı anda yürüttüğünü göstermez.",
+      "Şeklin amacı çoklu programlamada farklı işlerin bellekte tutulabileceğini anlatmaktır. Gerçek sistemde her süreç mutlaka tek ve bitişik bir fiziksel blokta yer almaz; sayfalama gibi yöntemler farklı yerleşimler oluşturabilir. Ayrıca koruma mekanizmaları, bir sürecin diğerinin veya çekirdeğin alanını denetimsiz değiştirmesini engellemeye yardımcı olur. Bellek yerleşimi ile CPU zamanlaması iki ayrı sorudur."
+    ],
+    "short_student_text": "Dikey şekil, belleğin adreslerle düzenlenen bir alan olduğunu gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.1 Multiprogramming and Multitasking",
+      "pdf_pages": [
+        51,
+        52
+      ],
+      "printed_pages": [
+        23,
+        24
+      ]
+    },
+    "image_sha256": "e3623ffc7d8d0209e3db3251f96fe3813b36017c16a1dd5780674ca5cb6250cd"
+  },
+  {
+    "slide": 34,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 34,
+    "source_slide_label": "1.34",
+    "topic": "Çift Modlu Çalışma",
+    "student_paragraphs": [
+      "İşlemcinin bazı işlemleri yalnızca ayrıcalıklı kod için izinli kılması, işletim sisteminin kendisini ve süreçleri korumasına yardımcı olur. Kullanıcı modu uygulamaların sınırlı yetkilerle, çekirdek modu ise işletim sisteminin gerekli ayrıcalıklı işlemleriyle ilişkilidir. Bu ayrım, uygulamanın bütün aygıtları istediği gibi yönetmesini önler.",
+      "Mod bilgisi donanım tarafından izlenir. Sıradan bir kullanıcı komutu bu bilgiyi istediği gibi değiştirerek yetki kazanamaz; kontrollü geçişler gerekir. Çekirdek modunu yönetici hesabıyla karıştırmamak önemlidir. Yönetici hesabına ait bir uygulama da normal kodunu kullanıcı modunda yürütür ve gerektiğinde sistem çağrısıyla çekirdek hizmeti ister. Bazı mimariler ikiden fazla ayrıcalık düzeyi sunabilir."
+    ],
+    "short_student_text": "İşlemcinin bazı işlemleri yalnızca ayrıcalıklı kod için izinli kılması, işletim sisteminin kendisini ve süreçleri korumasına yardımcı olur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.2 Dual-Mode and Multimode Operation",
+      "pdf_pages": [
+        52,
+        54
+      ],
+      "printed_pages": [
+        24,
+        26
+      ]
+    },
+    "image_sha256": "a4c8f5678776ee0efbd4ace500902f1b1f76d70f1c02146c9c47cd2810742650"
+  },
+  {
+    "slide": 35,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 35,
+    "source_slide_label": "1.35",
+    "topic": "Kullanıcı Modundan Çekirdek Moduna",
+    "student_paragraphs": [
+      "Üst bölge kullanıcı modunu, alt bölge çekirdek modunu gösterir. Kullanıcı süreci normal kodunu üst bölgede çalıştırır. Dosya okuma gibi yetkili bir işletim sistemi hizmeti gerektiğinde bir sistem çağrısı yapar. Şekilde soldan sağa giden ilk ok, bu isteğin başlatılmasını gösterir.",
+      "Aşağı yönlü trap oku, denetimin kontrollü bir giriş noktasından çekirdeğe geçmesini temsil eder. İşlemcinin çalışma modu değişir ve sistem çağrısına hizmet eden çekirdek kodu yürütülür. Uygulama böylece istediği herhangi bir ayrıcalıklı komutu serbestçe çalıştırma hakkı kazanmaz. İşletim sistemi isteği ve ilgili erişim izinlerini değerlendirir.",
+      "Yukarı yönlü return oku, hizmetten sonra kullanıcı moduna dönüşü gösterir. Bu geçişi yalnızca korumalı bir gişeden hizmet alma benzetmesiyle düşünebiliriz: Başvuruyu kullanıcı yapar, yetkili işlemi görevli yürütür, sonuç kullanıcıya döner. Teknik olarak değişen şey kullanıcının hesabı veya kimliği değil, işlemcinin yürütme yetkisi ve yürüttüğü koddur.",
+      "Şekilde kullanıcı modu 1, çekirdek modu 0 ile gösterilmiştir; bu değerler öğretici modelin gösterimidir, bütün işlemci mimarileri için aynı bit düzenini varsaymamalıyız. Ayrıca mod değişimi ile başka bir sürece geçmek aynı olay değildir. Bir süreç hizmet almak üzere çekirdeğe geçip yine kendi yürütmesine dönebilir."
+    ],
+    "short_student_text": "Üst bölge kullanıcı modunu, alt bölge çekirdek modunu gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.2 Dual-Mode and Multimode Operation",
+      "pdf_pages": [
+        52,
+        54
+      ],
+      "printed_pages": [
+        24,
+        26
+      ]
+    },
+    "image_sha256": "4b1e580636ac32d630802a26edf1e9c977dc22c33b4d6cd10a93a382ac99a8cd"
+  },
+  {
+    "slide": 36,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 36,
+    "source_slide_label": "1.36",
+    "topic": "Zamanlayıcı",
+    "student_paragraphs": [
+      "Zamanlayıcı donanımı belirli bir sürenin ardından kesme üretebilir. Böylece işletim sistemi, çalışan uygulama kendi isteğiyle bırakmasa bile denetimi geri alabilir. Bu mekanizma, sonsuz döngüde kalan bir programın bütün işlemciyi süresiz sahiplenmesine karşı temel dayanaklardan biridir.",
+      "Süre dolduğunda her programın otomatik sonlandırılması gerekmez. Çekirdek, zamanlama politikasına göre aynı süreci sürdürmeye veya başka bir süreci seçmeye karar verebilir. Donanım zamanlayıcısı kesme üretir; süreç zamanlayıcısı ise sırada hangi işin çalışacağını seçen işletim sistemi mantığıdır. Slaytta geçen zamanlayıcı teriminin bu iki farklı rolünü ayırmak gerekir. Zamanlayıcıyı ayarlamak ayrıcalıklı bir işlem olabilir."
+    ],
+    "short_student_text": "Zamanlayıcı donanımı belirli bir sürenin ardından kesme üretebilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.4.3 Timer",
+      "pdf_pages": [
+        54,
+        55
+      ],
+      "printed_pages": [
+        26,
+        27
+      ]
+    },
+    "image_sha256": "fa49daa7cff1784449d63e97b780507ad10007f587506492ab2e92c89e0b933d"
+  },
+  {
+    "slide": 37,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 37,
+    "source_slide_label": "1.37",
+    "topic": "Süreç Yönetimi",
+    "student_paragraphs": [
+      "Program, diskte duran komutlar ve verilerden oluşan pasif bir dosya olabilir. Süreç ise bu programın yürütülmekte olan örneğidir: kendisine ait yürütme durumu, bellek bilgisi ve açık dosyaları gibi kaynakları vardır. Aynı programdan iki kez çalıştırmak, birbirinden ayrı süreçler oluşturabilir.",
+      "Program sayacı, yürütmenin devam edeceği komutun konumunu izler. Tek iş parçacıklı bir süreçte tek yürütme akışı, çok iş parçacıklı bir süreçte birden fazla yürütme akışı bulunur. 'Komutları sırayla yürütmek' ifadesi dallanma veya döngü bulunmadığı anlamına gelmez; sıradaki komut adresi bu yapılara göre değişebilir. Süreç sonlandığında yeniden kullanılabilecek kaynakların geri alınması gerekir."
+    ],
+    "short_student_text": "Program, diskte duran komutlar ve verilerden oluşan pasif bir dosya olabilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.1 Process Management",
+      "pdf_pages": [
+        55,
+        56
+      ],
+      "printed_pages": [
+        27,
+        28
+      ]
+    },
+    "image_sha256": "e6e5bb946b15ca4c76b39233bfb5fe352fda0e05a5f0431c6420da07b5b93e15"
+  },
+  {
+    "slide": 38,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 38,
+    "source_slide_label": "1.38",
+    "topic": "Süreç Yönetimi Faaliyetleri",
+    "student_paragraphs": [
+      "İşletim sistemi süreç oluşturur, çalışmasını izler ve bittiğinde kaynaklarını temizler. Bir süreci bekletmek veya yeniden çalışmaya uygun hâle getirmek de bu yönetimin parçasıdır. Ancak çalışmaya uygun olmak, hemen CPU’yu almış olmak anlamına gelmez; başka hazır süreçler de olabilir.",
+      "Süreçler bazen veri alışverişi yapmak veya ortak bir kaynağı sırayla kullanmak ister. İletişim mekanizmaları bilgi taşır; senkronizasyon mekanizmaları erişim ve olay sırasını düzenler. Birbirinin tuttuğu kaynakları bekleyen süreçlerde kilitlenme sorunu doğabilir. Bu hafta kavramları tanıyoruz; ayrıntılı süreç ve senkronizasyon konularında bu görevlerin nasıl uygulandığını inceleyeceğiz."
+    ],
+    "short_student_text": "İşletim sistemi süreç oluşturur, çalışmasını izler ve bittiğinde kaynaklarını temizler.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.1 Process Management",
+      "pdf_pages": [
+        55,
+        56
+      ],
+      "printed_pages": [
+        27,
+        28
+      ]
+    },
+    "image_sha256": "62b006bc27e571d2a285584c8ba68ec366f16f5d91d7bebc5175c3739a262f83"
+  },
+  {
+    "slide": 39,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 39,
+    "source_slide_label": "1.39",
+    "topic": "Bellek Yönetimi",
+    "student_paragraphs": [
+      "Bellek yönetimi, hangi alanın kimin tarafından kullanıldığını izler ve yeni istekler için alan ayırır. Sürecin komut ve verilerine erişebilmesi için gerekli kısımlar uygun bellek düzeylerinde hazır olmalıdır. Bir süreç çalışmak istediğinde yalnızca dosyasının diskte bulunması yeterli değildir.",
+      "Bu yönetim bir sınıftaki dolap gözlerini paylaştırmaya benzetilebilir: Kimin hangi gözü kullandığını bilmeden aynı alanı iki kişiye vermek sorun çıkarır. Teknik karşılığı tahsis bilgisi ve adres erişiminin korunmasıdır. Alan artık gerekmediğinde geri alınmalıdır. Hangi verinin bellekte kalacağına ilişkin kararlar hem performansı hem de sistemin aynı anda kaç işi destekleyebileceğini etkiler."
+    ],
+    "short_student_text": "Bellek yönetimi, hangi alanın kimin tarafından kullanıldığını izler ve yeni istekler için alan ayırır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.2 Memory Management",
+      "pdf_pages": [
+        56,
+        57
+      ],
+      "printed_pages": [
+        28,
+        29
+      ]
+    },
+    "image_sha256": "2cf5122d1f0c9d696610914f59eee5537c5dc3c7a6e9609b3a7c50159be4fc2b"
+  },
+  {
+    "slide": 40,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 40,
+    "source_slide_label": "1.40",
+    "topic": "Dosya Sistemi Yönetimi",
+    "student_paragraphs": [
+      "Dosya sistemi, uygulamalara sektör numaraları yerine dosya ve dizin gibi mantıksal nesneler sunar. Bir dosya adıyla veri istemek, fiziksel aygıtın bütün düzenini bilme ihtiyacını azaltır. İşletim sistemi mantıksal konumu depolamadaki yerleşimle ilişkilendirir.",
+      "Dosya oluşturma, silme, okuma ve yazma işlemlerinin yanında erişim izinleri de önemlidir. Bir dosyanın var olması, her kullanıcının onu değiştirebileceği anlamına gelmez. Yedekleme de dosyaların korunmasıyla ilişkilidir; fakat dosya sisteminin bulunması tek başına otomatik yedek alındığını garanti etmez. Dosyanın mantıksal düzeni ile alttaki depolama aygıtının fiziksel özellikleri ayrı düzeylerdir."
+    ],
+    "short_student_text": "Dosya sistemi, uygulamalara sektör numaraları yerine dosya ve dizin gibi mantıksal nesneler sunar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.3 File-System Management",
+      "pdf_pages": [
+        57,
+        58
+      ],
+      "printed_pages": [
+        29,
+        30
+      ]
+    },
+    "image_sha256": "03def559f42f52a4cb36df5887aa0db2d1a574b5aee02b7b30311ab73bf52da4"
+  },
+  {
+    "slide": 41,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 41,
+    "source_slide_label": "1.41",
+    "topic": "Yığın Depolama Yönetimi",
+    "student_paragraphs": [
+      "Kalıcı depolamada boş alanın nerede bulunduğu, yeni veriye ne kadar alan ayrılacağı ve isteklerin nasıl işleneceği takip edilir. Depolama dolduğunda yalnızca 'disk var' bilgisi işe yaramaz; yeni yazma isteği için uygun boş blok gerekir.",
+      "HDD’de mekanik hareketi azaltan istek sıraları önemli olabilirken SSD farklı özelliklere sahiptir. Bu nedenle aynı yöntem bütün aygıtlarda aynı kazancı sağlamaz. Bağlama ve ayırma işlemleri de bir dosya sisteminin erişilebilir yapılmasıyla ilişkilidir; aygıtın kablosunu takmakla her zaman aynı şey değildir. Kalıcı depolama yönetimi, önceki slayttaki dosya adlarının altında yer alan alan ve aygıt düzenini ele alır."
+    ],
+    "short_student_text": "Kalıcı depolamada boş alanın nerede bulunduğu, yeni veriye ne kadar alan ayrılacağı ve isteklerin nasıl işleneceği takip edilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.4 Mass-Storage Management",
+      "pdf_pages": [
+        58,
+        58
+      ],
+      "printed_pages": [
+        30,
+        30
+      ]
+    },
+    "image_sha256": "890441604a520fd5df1d09d413f73bd45f25e3d0709c895c3c6f79d6986ae410"
+  },
+  {
+    "slide": 42,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 42,
+    "source_slide_label": "1.42",
+    "topic": "Önbellek (Caching)",
+    "student_paragraphs": [
+      "Önbellek, bir bilginin daha hızlı erişilen bir kopyasını tutar. İstenen bilgi oradaysa önbellek isabeti, orada değilse önbellek kaçırması oluşur. Kaçırmada veri daha yavaş düzeyden getirilir; uygun politikaya göre önbelleğe de alınabilir.",
+      "Sık kullandığınız kitabı uzak raftan her seferinde almak yerine masada tutmanız buna benzer. Teknik sorun, küçük ve hızlı alanın hangi verileri tutacağıdır. Yer dolduğunda bir verinin çıkarılması gerekir. Bir veri değiştiğinde kopyaların nasıl güncelleneceği de önemlidir. Bu yüzden önbellek yalnızca 'daha hızlı bellek' değil, yer seçme, değiştirme ve tutarlılık kararlarını da içeren bir mekanizmadır."
+    ],
+    "short_student_text": "Önbellek, bir bilginin daha hızlı erişilen bir kopyasını tutar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.5 Cache Management",
+      "pdf_pages": [
+        58,
+        60
+      ],
+      "printed_pages": [
+        30,
+        32
+      ]
+    },
+    "image_sha256": "6c8449cd815b2aa1f9d78f3e98fa795fca7cf27e9a1bf8938b5bb0e659fcfad6"
+  },
+  {
+    "slide": 43,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 43,
+    "source_slide_label": "1.43",
+    "topic": "Çeşitli Depolama Türlerinin Özellikleri",
+    "student_paragraphs": [
+      "Tablo, kaydedici, önbellek, ana bellek ve kalıcı depolamayı erişim süresi, kapasite, teknoloji ve yöneten bileşen açısından karşılaştırır. Satırları okuyunca hızın tek başına yeterli olmadığını görürüz: Büyük bir arşiv için kapasite ve kalıcılık, sık yürütülen bir hesap için gecikme önemlidir.",
+      "Tablodaki sayılar belirli bir dönemin tipik değerleridir; güncel bütün ürünler için kesin sınırlar değildir. Disk ile RAM arasındaki hareket çoğunlukla işletim sistemi ve sürücülerle, RAM–önbellek–kaydedici ilişkisi ise donanım mekanizmaları ve yürütülen komutlarla düzenlenir. Slayttaki 'açık/manuel' sözcüğünü, kullanıcının her aktarımı elle yaptığı şeklinde yorumlamamalıyız. Düzeyler arası hareketin hangi bileşenin sorumluluğunda olduğunu ayırmak amaçlanır."
+    ],
+    "short_student_text": "Tablo, kaydedici, önbellek, ana bellek ve kalıcı depolamayı erişim süresi, kapasite, teknoloji ve yöneten bileşen açısından karşılaştırır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.5 Cache Management",
+      "pdf_pages": [
+        58,
+        60
+      ],
+      "printed_pages": [
+        30,
+        32
+      ]
+    },
+    "image_sha256": "c1857d58ec6e78592d3f96ae05b7a6528cd37e80c3c81a60f4501f145e65ff45"
+  },
+  {
+    "slide": 44,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 44,
+    "source_slide_label": "1.44",
+    "topic": "\"A\" Verisinin Diskten Kaydediciye Göçü",
+    "student_paragraphs": [
+      "Yatay oklar, A verisinin diskten ana belleğe, önbelleğe ve kaydediciye doğru kullanılabilir kopyalar hâlinde ilerlemesini gösterir. CPU hesaplama sırasında kaydedicideki değeri değiştirebilir. Bu durumda bütün kopyaların aynı anda kendiliğinden aynı değerde olduğunu varsayamayız.",
+      "Birden fazla çekirdek kendi önbelleğini kullandığında donanımın önbellek tutarlılığı mekanizmaları ortak bellek görünümünü destekler. Ancak bu, uygulama düzeyindeki bütün yarış durumlarının çözüldüğü anlamına gelmez. Uygulamalar yine uygun senkronizasyona ihtiyaç duyabilir. Ayrı bilgisayarlarda tutulan kopyalarda ise ağ gecikmesi ve hata gibi ek etkenler devreye girer. Hız için kopya tutmanın bedeli, doğru kopyayı kullanmayı yönetmektir."
+    ],
+    "short_student_text": "Yatay oklar, A verisinin diskten ana belleğe, önbelleğe ve kaydediciye doğru kullanılabilir kopyalar hâlinde ilerlemesini gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.5 Cache Management",
+      "pdf_pages": [
+        58,
+        60
+      ],
+      "printed_pages": [
+        30,
+        32
+      ]
+    },
+    "image_sha256": "8edc2f33bd6ee4b66931ad6ef7a5cf9789e60d817b6feba7ec804dcf3e3b2d84"
+  },
+  {
+    "slide": 45,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 45,
+    "source_slide_label": "1.45",
+    "topic": "I/O Alt Sistemi",
+    "student_paragraphs": [
+      "Tamponlama, veri aktarımı sırasında geçici bir bekleme alanı kullanmaktır; tarafların hızları veya aktarım boyutları farklı olduğunda işe yarar. Önbellekleme ise yeniden erişilmesi beklenen verinin hızlı bir kopyasını saklar. İkisi aynı bellek alanlarından yararlanabilse de temel amaçları farklıdır.",
+      "Biriktirme, yani spooling, işleri bir aygıtın sırayla işlemesi için kuyrukta tutar. Birden fazla uygulamanın yazdırma işinin diskte sıraya alınması iyi bir örnektir. Böylece yazıcı her işi uygun sırayla işleyebilir. Slayttaki kısa biriktirme tanımı bu kuyruk mantığıyla okunmalıdır. Genel sürücü arayüzü ortak istek biçimini, özel sürücü ise belirli donanımla iletişimin ayrıntısını sağlar."
+    ],
+    "short_student_text": "Tamponlama, veri aktarımı sırasında geçici bir bekleme alanı kullanmaktır; tarafların hızları veya aktarım boyutları farklı olduğunda işe yarar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.5.6 I/O System Management",
+      "pdf_pages": [
+        60,
+        60
+      ],
+      "printed_pages": [
+        32,
+        32
+      ]
+    },
+    "image_sha256": "8a6a12edc8cc295c0e1d6d59948dca972620d39853bd0d27b7dd0c81a4397918"
+  },
+  {
+    "slide": 46,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 46,
+    "source_slide_label": "1.46",
+    "topic": "Koruma ve Güvenlik",
+    "student_paragraphs": [
+      "Koruma, hangi kullanıcının veya sürecin hangi kaynağa ne yapabileceğini denetleyen mekanizmalarla ilgilidir. Güvenlik daha geniş biçimde yetkisiz erişim, hizmet engelleme ve veri ihlali gibi tehditlere karşı savunmayı kapsar. Bir dosyanın yalnızca sahibince okunabilmesi koruma örneğidir.",
+      "Kullanıcı ve grup kimlikleri, erişim kararları için temel bilgiler sağlayabilir. Aynı gruba verilen yetki, ortak çalışma dosyalarına erişimi kolaylaştırabilir. Ayrıcalık yükseltme ise bazen yetkili bir yönetim işlemi, bazen de bir saldırının sonucu olabilir; bağlam önemlidir. Kullanıcı kimliği, dosya izinleri ve donanım çalışma modu aynı şey değildir. Bu mekanizmalar farklı katmanlarda birlikte koruma sağlar."
+    ],
+    "short_student_text": "Koruma, hangi kullanıcının veya sürecin hangi kaynağa ne yapabileceğini denetleyen mekanizmalarla ilgilidir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.6 Security and Protection",
+      "pdf_pages": [
+        61,
+        62
+      ],
+      "printed_pages": [
+        33,
+        34
+      ]
+    },
+    "image_sha256": "d6819ca51a8ef6e3211157ec7fd27c4b9987e7de6f5409c4ed86d8704ca847b0"
+  },
+  {
+    "slide": 47,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 47,
+    "source_slide_label": "1.47",
+    "topic": "Sanallaştırma",
+    "student_paragraphs": [
+      "Sanallaştırmada fiziksel işlemci, bellek ve aygıt kaynakları üzerinde birden fazla sanal makineye çalışma ortamı sunulur. Sanal makine yöneticisi, yani VMM veya hipervizör, bu paylaşımı düzenler. Her konuk kendi işletim sistemini çalıştırabilir; fiziksel kaynaklar yine ortak ve sınırlıdır.",
+      "Emülasyon, farklı bir donanımın davranışını taklit edebilir; özellikle farklı komut kümelerini çalıştırmak gerektiğinde gündeme gelir. Donanım destekli sanallaştırma ile komut kümesi emülasyonunu aynı şey saymamalıyız. Slayttaki ürün ve eski işletim sistemi adları tarihsel örneklerdir. Yeni bir kurulum seçmekten önceki amaç, konuk sistem ile onun altında kaynak sağlayan katmanın farklı olduğunu anlamaktır."
+    ],
+    "short_student_text": "Sanallaştırmada fiziksel işlemci, bellek ve aygıt kaynakları üzerinde birden fazla sanal makineye çalışma ortamı sunulur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.7 Virtualization",
+      "pdf_pages": [
+        62,
+        63
+      ],
+      "printed_pages": [
+        34,
+        35
+      ]
+    },
+    "image_sha256": "0427a05f5d47bc239e4defce24a9aec26c305f5cdea40892c3d06ae6fc85b3f1"
+  },
+  {
+    "slide": 48,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 48,
+    "source_slide_label": "1.48",
+    "topic": "Sanallaştırma (devam)",
+    "student_paragraphs": [
+      "Sanal makineler, ayrı fiziksel makineler hazırlamadan farklı sistemleri denemeyi ve test ortamlarını ayırmayı kolaylaştırır. Örneğin öğrenci deneyi için bir konuk ortam hazırlanabilir; fakat işlemci, RAM ve disk sınırları çalıştırılabilecek konuk sayısını belirler. İzolasyonun varlığı da yedekleme ve güvenlik gereksinimlerini ortadan kaldırmaz.",
+      "Bazı hipervizörler donanım üzerinde doğrudan çalışır; bazıları bir ana işletim sistemi üzerinde hizmet verir. Bu ayrım, konukların altında hangi katmanın bulunduğunu açıklamaya yardım eder. Sunumdaki eski ürün adlarından güncel ürün desteği veya bütün işlemci mimarileriyle uyumluluk sonucu çıkarılmamalıdır. Burada öğrenilecek temel ilişki fiziksel kaynak, sanallaştırma katmanı ve konuk işletim sistemidir."
+    ],
+    "short_student_text": "Sanal makineler, ayrı fiziksel makineler hazırlamadan farklı sistemleri denemeyi ve test ortamlarını ayırmayı kolaylaştırır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.7 Virtualization",
+      "pdf_pages": [
+        62,
+        63
+      ],
+      "printed_pages": [
+        34,
+        35
+      ]
+    },
+    "image_sha256": "5e0cf57c969f7d1a67520a221d382e5de7d7edf9746a6d6abb96bda98080ca99"
+  },
+  {
+    "slide": 49,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 49,
+    "source_slide_label": "1.49",
+    "topic": "Bilgisayar Ortamları - Sanallaştırma",
+    "student_paragraphs": [
+      "Soldaki modelde uygulama süreçleri tek çekirdek üzerinden donanıma ulaşır. Sağdaki modelde ise donanımın üzerinde sanal makine yöneticisi bulunur; onun üstünde ayrı konuk çekirdekleri ve süreçler yer alır. Dikey düzen, hangi katmanın hangi alt hizmeti kullandığını gösterir.",
+      "Her sanal makinenin ayrı işletim sistemi örneği bulunması, fiziksel kaynaklarının tamamen ayrı olduğu anlamına gelmez. Hipervizör fiziksel CPU zamanını ve belleği sanal makinelere paylaştırır. Şekildeki oklar bu katmanlar arasındaki etkileşimi temsil eder; performansın konuk sayısıyla doğrusal arttığını göstermez. Sanal makineyi yalnızca aynı işletim sisteminde açılmış başka bir uygulama penceresi olarak düşünmek yetersizdir."
+    ],
+    "short_student_text": "Soldaki modelde uygulama süreçleri tek çekirdek üzerinden donanıma ulaşır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.7 Virtualization",
+      "pdf_pages": [
+        62,
+        63
+      ],
+      "printed_pages": [
+        34,
+        35
+      ]
+    },
+    "image_sha256": "92c0b843cb4421bc2667bfb8361c187e8ab5b587c5e717de57458bc19da2439b"
+  },
+  {
+    "slide": 50,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 50,
+    "source_slide_label": "1.50",
+    "topic": "Dağıtık Sistemler",
+    "student_paragraphs": [
+      "Dağıtık sistem, birbirinden ayrı bilgisayarların ağ üzerinden iletişim kurarak birlikte iş yapmasıdır. Makinelerin işlemcisi, işletim sistemi veya kapasitesi aynı olmak zorunda değildir. Temel fark, tek makinedeki ortak bellek yerine ağ üzerinden mesajlaşma ve uzak hizmetlerin devreye girmesidir.",
+      "LAN, WAN, MAN ve PAN ağın kapsamını betimler; tek başına uygulamanın nasıl dağıtıldığını açıklamaz. Ayrıca ağa bağlı her bilgisayar grubu kullanıcıya tek bir makine gibi görünmez. Ağ işletim sistemleri uzak kaynaklara erişim sağlayabilirken tek sistem görünümü, bazı dağıtık sistem tasarımlarının ayrıca sunduğu bir özelliktir. İletişim gecikmesi ve bir makinenin ulaşılamaz olması tasarımın parçası hâline gelir."
+    ],
+    "short_student_text": "Dağıtık sistem, birbirinden ayrı bilgisayarların ağ üzerinden iletişim kurarak birlikte iş yapmasıdır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.8 Distributed Systems",
+      "pdf_pages": [
+        63,
+        64
+      ],
+      "printed_pages": [
+        35,
+        36
+      ]
+    },
+    "image_sha256": "665e272aac08bb2bbe1b9f935486ca3a6b64d3b14fe0adaea0717df56a05a6c2"
+  },
+  {
+    "slide": 51,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 51,
+    "source_slide_label": "1.51",
+    "topic": "Bilgisayar Sistemi Mimarisi",
+    "student_paragraphs": [
+      "Şimdi tek bir bilgisayarın içinde birden fazla işlem birimi bulunmasıyla, ayrı bilgisayarların birlikte çalışmasını karşılaştıracağız. Paylaşılan bellek, çekirdek sayısı ve makine sınırı bu mimarileri ayırt etmek için kullanacağımız temel ölçütlerdir."
+    ],
+    "short_student_text": "Şimdi tek bir bilgisayarın içinde birden fazla işlem birimi bulunmasıyla, ayrı bilgisayarların birlikte çalışmasını karşılaştıracağız.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.1–1.3.2 Computer-System Architecture",
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "printed_pages": [
+        15,
+        19
+      ]
+    },
+    "image_sha256": "a84b6e05d88f311512a71dea53d5402ccd4f1546f550a1dd6960a63b9dd67b3f"
+  },
+  {
+    "slide": 52,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 52,
+    "source_slide_label": "1.52",
+    "topic": "Bilgisayar Sistemi Mimarisi",
+    "student_paragraphs": [
+      "Genel amaçlı işlemci kullanıcı programlarının farklı türde komutlarını yürütürken, aygıt denetleyicileri gibi özel işlem birimleri belirli işlere odaklanabilir. Çok işlemcili yapı, birden fazla yürütme kaynağı sunarak uygun işlerde toplam tamamlanan işi artırabilir.",
+      "Asimetrik yaklaşımda işlemcilere farklı roller atanabilir; simetrik yaklaşımda işlemciler işletim sistemi görevlerini ve kullanıcı işlerini yerine getirebilir. Ancak çok işlemci, her programın aynı oranda hızlanmasını veya her arızanın etkisiz kalmasını garanti etmez. Paylaşılan kaynaklara erişim, yazılımın paralelleştirilebilirliği ve hata toleransı tasarımı önemlidir. Slayttaki tek işlemcili sistem vurgusu tarihsel bağlamdadır; mimari ayrımlar zamandan bağımsız temel kazanımdır."
+    ],
+    "short_student_text": "Genel amaçlı işlemci kullanıcı programlarının farklı türde komutlarını yürütürken, aygıt denetleyicileri gibi özel işlem birimleri belirli işlere odaklanabilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.1–1.3.2 Computer-System Architecture",
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "printed_pages": [
+        15,
+        19
+      ]
+    },
+    "image_sha256": "941051f9085d6dfe464496c17278acbc1c61589d0cd2b44a4eecb7276a799569"
+  },
+  {
+    "slide": 53,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 53,
+    "source_slide_label": "1.53",
+    "topic": "Simetrik Çoklu İşlem Mimarisi",
+    "student_paragraphs": [
+      "Şekilde her işlemcinin kendi kaydedicileri ve önbelleği bulunur; alttaki ana bellek ise ortaktır. Bağlantı çizgileri, iki işlemcinin de ortak belleğe erişebildiğini gösterir. Bu sayede farklı yürütme akışları farklı işlemcilerde gerçekten aynı zamanda çalışabilir.",
+      "Ortak bellekteki aynı veri iki önbellekte kopyalanırsa önceki önbellek tutarlılığı konusu yeniden önem kazanır. Ayrıca belleğe erişim kapasitesi sınırsız değildir; işlemciler ortak kaynaklar için yarışabilir. Simetrik yapı, işlemcilerin her an aynı işi yaptığı anlamına gelmez. Benzer yeteneklerle farklı işlere atanabildikleri bir düzeni anlatır."
+    ],
+    "short_student_text": "Şekilde her işlemcinin kendi kaydedicileri ve önbelleği bulunur; alttaki ana bellek ise ortaktır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.1–1.3.2 Computer-System Architecture",
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "printed_pages": [
+        15,
+        19
+      ]
+    },
+    "image_sha256": "d49ed534cd0942be6f806fea45dd53033e876df7c3514d6034efd6572b34a24b"
+  },
+  {
+    "slide": 54,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 54,
+    "source_slide_label": "1.54",
+    "topic": "Çift Çekirdekli Tasarım",
+    "student_paragraphs": [
+      "Bu şekil tek işlemci paketinde iki CPU çekirdeği bulunduğunu gösterir. Her çekirdeğin kaydedicileri ve L1 önbelleği ayrıdır; şekilde L2 önbellek ve ana bellek ortak gösterilmiştir. Çizgileri izleyerek hangi kaynağın çekirdeğe özel, hangisinin paylaşılmış olduğunu ayırt edebilirsiniz.",
+      "Bu, çift çekirdeğin 'iki ayrı bilgisayar' olduğu anlamına gelmez. Aynı sistemin iki yürütme birimidir. Ayrıca her çok çekirdekli işlemcinin önbellek düzeni şekildekiyle aynı değildir; bu bir örnek tasarımdır. Bir programın iki çekirdeği verimli kullanabilmesi için işinin birden fazla yürütme akışına bölünebilmesi gerekir. Çekirdek sayısı ile yazılımın kullanabildiği paralellik ayrı özelliklerdir."
+    ],
+    "short_student_text": "Bu şekil tek işlemci paketinde iki CPU çekirdeği bulunduğunu gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.1–1.3.2 Computer-System Architecture",
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "printed_pages": [
+        15,
+        19
+      ]
+    },
+    "image_sha256": "143e614f3fc24d3068b95dce7388aec7648eb0ef5f0445401238cf9f3b861780"
+  },
+  {
+    "slide": 55,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 55,
+    "source_slide_label": "1.55",
+    "topic": "Çokbiçimli Bellek Erişim Sistemi",
+    "student_paragraphs": [
+      "Şekilde her işlemciye yakın bir bellek bölgesi vardır; diğer belleklere de işlemciler arası bağlantılarla ulaşılabilir. Düz ve kesikli çizgiler farklı erişim yollarını gösterir. Yerel belleğe erişim ile uzak işlemcinin belleğine erişimin maliyeti aynı olmayabilir; NUMA adı bu eşit olmayan erişimi anlatır.",
+      "İki masanın kendi yanında birer kitaplık olması gibi düşünebilirsiniz: Her kitaba ulaşabilirsiniz, ancak kendi kitaplığınızdaki kitaba erişmek daha kısa sürer. Teknik karşılığı bellek yerelliğidir. İşletim sistemi süreçleri ve bellek alanlarını yerleştirirken bu farkı dikkate alabilir. 'Bütün belleğe erişilebiliyor' olması, bütün adreslerin aynı gecikmeyle okunacağı anlamına gelmez."
+    ],
+    "short_student_text": "Şekilde her işlemciye yakın bir bellek bölgesi vardır; diğer belleklere de işlemciler arası bağlantılarla ulaşılabilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.1–1.3.2 Computer-System Architecture",
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "printed_pages": [
+        15,
+        19
+      ]
+    },
+    "image_sha256": "4d03f997bb5eae896bef9246a55cd185f836ff53e581ce5abfc24cbf4745cee9"
+  },
+  {
+    "slide": 56,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 56,
+    "source_slide_label": "1.56",
+    "topic": "Kümelenmiş(Clustered) Sistemler",
+    "student_paragraphs": [
+      "Küme, birlikte çalışan ayrı bilgisayarlardan oluşur. Bu makineler ağ veya özel bağlantılar üzerinden haberleşir; bazı tasarımlarda ortak depolama bulunur. Hedef, hizmetin bir düğüm arızasında başka düğümde sürmesi veya büyük bir hesabın makineler arasında paylaşılması olabilir.",
+      "Asimetrik kümelemede bekleyen bir düğüm devralmaya hazır tutulabilir. Simetrik düzende birden fazla düğüm hizmet verir ve birbirini izler. Bu tek başına kayıpsız ve anlık devralma garantisi değildir; algılama, veri tutarlılığı ve uygulama tasarımı gerekir. Dağıtılmış kilit yöneticisi, ortak veriye çakışan erişimleri düzenlemeye yardım eder. Yüksek erişilebilirlik ile yüksek performans aynı hedef değildir."
+    ],
+    "short_student_text": "Küme, birlikte çalışan ayrı bilgisayarlardan oluşur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.3 Clustered Systems",
+      "pdf_pages": [
+        47,
+        49
+      ],
+      "printed_pages": [
+        19,
+        21
+      ]
+    },
+    "image_sha256": "8b6da7dc7c135d3843a7b196aa731e0eb0fe2fedf2476b843b59e890da4c1b03"
+  },
+  {
+    "slide": 57,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 57,
+    "source_slide_label": "1.57",
+    "topic": "Kümelenmiş(Clustered) Sistemler",
+    "student_paragraphs": [
+      "Üstteki üç computer kutusu ayrı makineleri, aralarındaki interconnect bağlantıları haberleşmeyi temsil eder. Alttaki ortak storage-area network gösterimi, bir depolama altyapısına birden fazla düğümün erişebildiği örneği anlatır. Bu, tek anakart üzerindeki birden fazla çekirdekten farklıdır.",
+      "Bir düğüm arızalandığında diğerinin aynı veriye erişebilmesi hizmet devralmayı kolaylaştırabilir. Fakat aynı veriye iki düğümün kontrolsüz yazması bozulmaya yol açabilir; koordinasyon gerekir. Ortak depolama da ayrıca korunması gereken bir bileşendir. Şekil bir küme örneğidir; bütün kümelerin aynı SAN düzenini kullanması zorunlu değildir."
+    ],
+    "short_student_text": "Üstteki üç computer kutusu ayrı makineleri, aralarındaki interconnect bağlantıları haberleşmeyi temsil eder.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3.3 Clustered Systems",
+      "pdf_pages": [
+        47,
+        49
+      ],
+      "printed_pages": [
+        19,
+        21
+      ]
+    },
+    "image_sha256": "4715e1f939c538f830e8cc8c9e8200214110ea57ee161c71709698c74fa1eff9"
+  },
+  {
+    "slide": 58,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 58,
+    "source_slide_label": "1.58",
+    "topic": "PC Anakart",
+    "student_paragraphs": [
+      "Anakart fotoğrafındaki işlemci soketi, RAM yuvaları, genişleme bağlantıları ve giriş/çıkış noktaları daha önce soyut olarak gördüğümüz kaynakların fiziksel karşılıklarıdır. CPU soketi işlemci paketini, DRAM yuvaları ana belleği, genişleme yuvaları ise ek aygıt bağlantılarını gösterir.",
+      "Fotoğraftaki özel yerleşim bütün bilgisayarlar için geçerli değildir. Bazı sistemlerde işlemci ve bellek bileşenleri farklı biçimde bütünleşmiştir. Bu görüntüyü parça ezberlemek yerine, işlemci–bellek–aygıt ilişkisinin somut bir örneği olarak inceleyin. İşletim sistemi de fiziksel şekilden çok, donanımın sunduğu komutlar ve arayüzlerle çalışır."
+    ],
+    "short_student_text": "Anakart fotoğrafındaki işlemci soketi, RAM yuvaları, genişleme bağlantıları ve giriş/çıkış noktaları daha önce soyut olarak gördüğümüz kaynakların fiziksel karşılıklarıdır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.3 Computer-System Architecture (ilişkili okuma)",
+      "pdf_pages": [
+        43,
+        49
+      ],
+      "printed_pages": [
+        15,
+        21
+      ]
+    },
+    "image_sha256": "67efc945d551dc4dedb1e1a02388d4d8822e26771dbefa49db01cee25306ab38"
+  },
+  {
+    "slide": 59,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 59,
+    "source_slide_label": "1.59",
+    "topic": "Bilgisayar Sistemi Ortamları",
+    "student_paragraphs": [
+      "Bilgisayarın fiziksel mimarisinden kullanım ortamlarına geçiyoruz. Aynı temel işletim sistemi sorumlulukları bir telefonda enerji ve sensörlerle, bir sunucuda çok sayıda hizmet isteğiyle, gömülü cihazda ise belirli kontrol görevleriyle ilişkilenecektir."
+    ],
+    "short_student_text": "Bilgisayarın fiziksel mimarisinden kullanım ortamlarına geçiyoruz.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.1 Traditional Computing",
+      "pdf_pages": [
+        68,
+        69
+      ],
+      "printed_pages": [
+        40,
+        41
+      ]
+    },
+    "image_sha256": "4db78c8396ee3eb849890a40307225580fe03a6777195214416877c375a14016"
+  },
+  {
+    "slide": 60,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 60,
+    "source_slide_label": "1.60",
+    "topic": "Bilgi İşlem Ortamları",
+    "student_paragraphs": [
+      "Geleneksel, mobil, istemci–sunucu, eşler arası, bulut ve gerçek zamanlı ortamlar farklı sınıflandırma ölçütlerine dayanır. Mobil sözcüğü cihazın kullanımını, istemci–sunucu hizmet rollerini, gerçek zamanlı ise zaman kısıtını öne çıkarır. Bu yüzden kategoriler birbirini tamamen dışlamaz.",
+      "Örneğin bir telefon, buluttaki bir hizmetin istemcisi olabilir. Aynı uygulama hem mobil hem istemci–sunucu bağlamında değerlendirilebilir. Sonraki slaytlarda her ortam için kaynakların nerede bulunduğunu, kimin hizmet verdiğini ve hangi gereksinimin öncelikli olduğunu soracağız."
+    ],
+    "short_student_text": "Geleneksel, mobil, istemci–sunucu, eşler arası, bulut ve gerçek zamanlı ortamlar farklı sınıflandırma ölçütlerine dayanır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.1 Traditional Computing",
+      "pdf_pages": [
+        68,
+        69
+      ],
+      "printed_pages": [
+        40,
+        41
+      ]
+    },
+    "image_sha256": "8ed28a96790a0e82f9f718df79a527c6d45907dc2f7a1e6ad54a4cb05d6bfffc"
+  },
+  {
+    "slide": 61,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 61,
+    "source_slide_label": "1.61",
+    "topic": "Geleneksel",
+    "student_paragraphs": [
+      "Geleneksel kişisel bilgisayar kendi işlemcisi, belleği ve depolamasıyla yerel işler yürütebilir. Ancak ağ bağlantısı uzak dosyaları, hizmetleri ve web uygulamalarını da çalışma ortamının parçası yapar. Yerel makine ile uzak hizmet arasındaki iş bölümü bu nedenle önemlidir.",
+      "İnce istemcide işlemenin önemli bir kısmı uzak tarafta yapılabilir; yerel cihaz ağırlıklı olarak erişim ve etkileşim sağlar. Ağdan yararlanmak, bağlantı kesintisi ve erişim güvenliği gibi gereksinimleri de getirir. Güvenlik duvarı belirli trafik kurallarını uygular; tek başına bütün saldırıları engelleyen bir garanti değildir. Bağımsız çalışma ile ağ hizmetlerine bağımlı çalışma bir süreklilik içinde düşünülebilir."
+    ],
+    "short_student_text": "Geleneksel kişisel bilgisayar kendi işlemcisi, belleği ve depolamasıyla yerel işler yürütebilir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.1 Traditional Computing",
+      "pdf_pages": [
+        68,
+        69
+      ],
+      "printed_pages": [
+        40,
+        41
+      ]
+    },
+    "image_sha256": "27ce7a72fc191db1adf009a04294cbb984bdf93e5bc67772ce0d7802e16b99a5"
+  },
+  {
+    "slide": 62,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 62,
+    "source_slide_label": "1.62",
+    "topic": "Mobil Bilgi İşlem",
+    "student_paragraphs": [
+      "Mobil sistemlerde enerji, taşınabilirlik ve sensörler öne çıkar. Konum, hareket ve yön bilgisi yeni uygulama türlerini destekler; işletim sistemi bu donanımlara ortak arayüzler ve erişim denetimi sağlar. Örneğin bir uygulamanın konum istemesi hem aygıt kullanımı hem de izin kararı gerektirir.",
+      "İşlemciyi sürekli yüksek hızda çalıştırmak yanıt süresini iyileştirebilir ama pil tüketimini ve ısıyı artırabilir. Bu yüzden performans tek hedef değildir. Kablosuz ve hücresel bağlantıların değişkenliği de uygulamaların çalışmasını etkileyebilir. Slayttaki sistem adları örnektir; bu bölümün amacı ürün sıralaması değil, mobil ortamın işletim sistemi tasarımına getirdiği ihtiyaçları anlamaktır."
+    ],
+    "short_student_text": "Mobil sistemlerde enerji, taşınabilirlik ve sensörler öne çıkar.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.2 Mobile Computing",
+      "pdf_pages": [
+        69,
+        70
+      ],
+      "printed_pages": [
+        41,
+        42
+      ]
+    },
+    "image_sha256": "d81db2b09fd496697cde376b48d4b076ea5c3e9b5851efa6b26c03f247afe60d"
+  },
+  {
+    "slide": 63,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 63,
+    "source_slide_label": "1.63",
+    "topic": "İstemci Sunucu",
+    "student_paragraphs": [
+      "İstemci bir hizmeti ister, sunucu bu hizmete yanıt verir. Tarayıcının bir ders sayfasını istemesi bu modele örnektir. Sunucu rolünü üstlenen makine çok sayıda isteği işleyebilir; istemci de aldığı sonucu gösterir veya üzerinde başka hesaplamalar yapar.",
+      "İşlem sunucusunda istemci belirli bir işlemin yapılmasını isteyebilir; dosya sunucusunda ise dosyalara erişim hizmeti öne çıkar. Roller uygulama ilişkisine aittir: Güçlü bir bilgisayar da istemci olabilir, aynı makine farklı ilişkilerde sunucu olabilir. İstemcinin mutlaka hesaplama yapamayan bir terminal olduğunu varsaymamalıyız. Ağ iletişimi, kimlik doğrulama ve kaynak yönetimi hizmetin çalışmasını birlikte destekler."
+    ],
+    "short_student_text": "İstemci bir hizmeti ister, sunucu bu hizmete yanıt verir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.3 Client–Server Computing",
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "printed_pages": [
+        42,
+        43
+      ]
+    },
+    "image_sha256": "c855b74d2ee1618bc0811e78eb4302da5e386a30b7f97988c88541b244df0267"
+  },
+  {
+    "slide": 64,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 64,
+    "source_slide_label": "1.64",
+    "topic": "Eşler Arası (peer to peer)",
+    "student_paragraphs": [
+      "Şekilde eşler arasında çok sayıda bağlantı bulunması, hizmetin tek bir merkezden sağlanmak zorunda olmadığını anlatır. Bir eş veri isterken istemci, başka bir eşe veri sağlarken sunucu rolü üstlenebilir. Böylece roller tek bir düğüme kalıcı biçimde bağlanmaz.",
+      "Bu yapı her eşin her zaman bütün diğerleriyle doğrudan bağlı olması veya hiç merkezi bileşen bulunmaması anlamına gelmez. Bazı tasarımlar eşleri bulmak için merkezi bir dizin kullanabilir. Slayttaki uygulama adları tarihsel örneklerdir; güncel çalışma modelleri hakkında iddia olarak alınmamalıdır. Öğrenilecek nokta, hizmet ve yükün birden fazla katılımcı arasında dağıtılabilmesidir."
+    ],
+    "short_student_text": "Şekilde eşler arasında çok sayıda bağlantı bulunması, hizmetin tek bir merkezden sağlanmak zorunda olmadığını anlatır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.4 Peer-to-Peer Computing",
+      "pdf_pages": [
+        71,
+        72
+      ],
+      "printed_pages": [
+        43,
+        44
+      ]
+    },
+    "image_sha256": "84da777decc7b912d31438bccb012be2e4b4d0289ef1e8e657afd8f42a7f1faa"
+  },
+  {
+    "slide": 65,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 65,
+    "source_slide_label": "1.65",
+    "topic": "Bulut Bilişim",
+    "student_paragraphs": [
+      "Bulut bilişimde işlem, depolama veya uygulama yetenekleri ağ üzerinden hizmet olarak sunulur. Kullanıcı fiziksel sunucunun bütün ayrıntılarıyla ilgilenmeden kendisine sunulan kaynağı kullanabilir. Kaynakların isteğe göre sağlanabilmesi ve kullanımın yönetilmesi bu yaklaşımın önemli taraflarıdır.",
+      "Sanallaştırma, kaynakların bölünmesi ve yönetilmesi için yaygın bir araçtır; fakat her sanal makine bulut değildir ve bulutun bütün hizmetleri zorunlu olarak sanal makine üzerinde çalışmak zorunda değildir. Slayttaki firma ve kapasite ifadeleri tarihsel örneklerdir. Burada fiziksel makinenin konumu yerine, kaynağın hangi hizmet arayüzüyle ve hangi yönetim sorumluluğuyla sunulduğuna odaklanıyoruz."
+    ],
+    "short_student_text": "Bulut bilişimde işlem, depolama veya uygulama yetenekleri ağ üzerinden hizmet olarak sunulur.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.5 Cloud Computing",
+      "pdf_pages": [
+        72,
+        73
+      ],
+      "printed_pages": [
+        44,
+        45
+      ]
+    },
+    "image_sha256": "983bbba9ad21547b7ea9ca8eee441e8ccce95dc5f804cb591d62acbbf6547c39"
+  },
+  {
+    "slide": 66,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 66,
+    "source_slide_label": "1.66",
+    "topic": "Bulut Bilişim – Birçok Tipi var",
+    "student_paragraphs": [
+      "Genel, özel ve melez bulut ayrımı dağıtım ve kullanım düzenini anlatır. SaaS, PaaS ve IaaS ayrımı ise kullanıcının hangi hizmet katmanını aldığıyla ilgilidir. Bu iki sınıflandırmayı aynı sütunda birbirinin alternatifi gibi düşünmemeliyiz.",
+      "SaaS’ta kullanıcı hazır uygulamayı kullanır. PaaS, uygulama geliştirme ve çalıştırma için yönetilen bir platform sağlar. IaaS ise sanal sunucu, ağ ve depolama gibi altyapı kaynaklarını sunar; kullanıcı genellikle konuk işletim sistemi ve uygulama üzerinde daha fazla sorumluluk taşır. Bir veritabanı hizmetinin sınıfı sunuluş biçimine bağlıdır; yalnızca adında veritabanı geçmesi tek başına karar vermeye yetmez."
+    ],
+    "short_student_text": "Genel, özel ve melez bulut ayrımı dağıtım ve kullanım düzenini anlatır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.5 Cloud Computing",
+      "pdf_pages": [
+        72,
+        73
+      ],
+      "printed_pages": [
+        44,
+        45
+      ]
+    },
+    "image_sha256": "38d7ec1c1498e56a43e121477ea604ba21b1b3a23da15bd35ebd0d8ad1fb3634"
+  },
+  {
+    "slide": 67,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 67,
+    "source_slide_label": "1.67",
+    "topic": "Bulut Bilişim (devamı)",
+    "student_paragraphs": [
+      "Bulut ortamı geleneksel işletim sistemi görevlerini ortadan kaldırmaz. Süreçler hâlâ yürütülür, bellek tahsis edilir ve dosyalar saklanır. Bunlara çok sayıda kaynağın sağlanmasını, izlenmesini ve dağıtılmasını yöneten ek bir kontrol katmanı eklenir.",
+      "Yük dengeleyici, gelen istekleri uygun hizmet örneklerine yönlendirebilir. Bu, tek işletim sisteminin CPU zamanlayıcısından farklı bir düzeydir: Biri istekleri sunuculara, diğeri yürütme zamanını süreçlere dağıtır. Güvenlik duvarları da ağ erişim kurallarını uygular. Uygulama durumu ve veri tutarlılığı ayrıca yönetilmezse, yalnızca sunucu sayısını artırmak hizmetin doğru çalışmasını garanti etmez."
+    ],
+    "short_student_text": "Bulut ortamı geleneksel işletim sistemi görevlerini ortadan kaldırmaz.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.5 Cloud Computing",
+      "pdf_pages": [
+        72,
+        73
+      ],
+      "printed_pages": [
+        44,
+        45
+      ]
+    },
+    "image_sha256": "9737bdcc7563e20c0bb0992be3efbb481e6f2348561b6078aaea9ed833f84e3f"
+  },
+  {
+    "slide": 68,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 68,
+    "source_slide_label": "1.68",
+    "topic": "Gerçek Zamanlı Gömülü Sistemler",
+    "student_paragraphs": [
+      "Gerçek zamanlı bir sistemde doğru sonuç, gereken zaman sınırı içinde üretilmelidir. Çok hızlı ortalama sonuç vermek tek başına yeterli değildir; belirli bir olay için son tarihin kaçırılması kabul edilemeyebilir. Örneğin bir kontrol sisteminin sensör verisine zamanında yanıt vermesi gerekir.",
+      "Gömülü sözcüğü sistemin daha büyük bir cihaz içinde belirli göreve hizmet etmesini anlatır. Her gömülü sistem gerçek zamanlı olmak zorunda olmadığı gibi her biri işletim sistemi de kullanmaz. Gerçek zamanlılık ise bu görevlerin zaman gereksinimine ilişkindir. Bu ayrım, 'küçük bilgisayar' ile 'zaman garantisi isteyen sistem' kavramlarının karıştırılmasını önler."
+    ],
+    "short_student_text": "Gerçek zamanlı bir sistemde doğru sonuç, gereken zaman sınırı içinde üretilmelidir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.10.6 Real-Time Embedded Systems",
+      "pdf_pages": [
+        73,
+        74
+      ],
+      "printed_pages": [
+        45,
+        46
+      ]
+    },
+    "image_sha256": "bac478f86faed529cf6884feab206e5392a0fd4c6944572664ce38e41fff4876"
+  },
+  {
+    "slide": 69,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 69,
+    "source_slide_label": "1.69",
+    "topic": "Ücretsiz ve Açık Kaynaklı İşletim Sistemleri",
+    "student_paragraphs": [
+      "Kaynak kodun erişilebilir olması, işletim sisteminin nasıl çalıştığını incelemeyi kolaylaştırır. Özgür yazılım vurgusu kullanma, inceleme, değiştirme ve paylaşma özgürlükleri üzerindedir; ücretsiz olma ise fiyatla ilgilidir. Bu iki anlamı birbirine eşitlememeliyiz.",
+      "Açık kaynak lisansları kodun incelenmesi ve yeniden kullanılması için belirli haklar ve koşullar tanımlar. GPL bunlardan biridir; bütün açık kaynak yazılımlar aynı lisansı kullanmaz. Bir ürünün bazı bileşenlerinin açık olması da tamamının açık kaynak olduğu anlamına gelmez. Sunumdaki ürün ve lisans ifadeleri dönemsel örneklerdir; öğrenilecek temel alışkanlık, izinleri ürün adına göre varsaymak yerine ilgili lisansa bakmaktır."
+    ],
+    "short_student_text": "Kaynak kodun erişilebilir olması, işletim sisteminin nasıl çalıştığını incelemeyi kolaylaştırır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.11 Free and Open-Source Operating Systems",
+      "pdf_pages": [
+        74,
+        79
+      ],
+      "printed_pages": [
+        46,
+        51
+      ]
+    },
+    "image_sha256": "a14eb294daab1a1ee6c0780d339795b9182c774ed0fa04e46ad020f99d907f12"
+  },
+  {
+    "slide": 70,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 70,
+    "source_slide_label": "1.70",
+    "topic": "İşletim Sistemleri Çalışması",
+    "student_paragraphs": [
+      "Kaynak koda erişmek, kitapta anlatılan süreç veya bellek yönetimi kavramlarının somut uygulamalarını inceleme olanağı verir. Ancak büyük bir çekirdeğin bütün kodunu ilk haftada anlamak beklenmez. Önce belirli bir veri yapısı ya da işlevin hangi sorunu çözdüğünü izlemek daha anlamlıdır.",
+      "Slayttaki 'yüzlerce işletim sistemi' ifadesi sanallaştırmanın sağladığı çeşitliliği vurgular; her kişisel bilgisayarda yüzlercesinin aynı anda çalışacağı garantisi değildir. RAM, CPU, depolama ve mimari uyumluluk sınırları vardır. Ayrıca bir sistemin bazı kaynaklarının açık olması bütün sürümlerinin açık olduğu sonucunu vermez. İnceleme yapmak, değişikliği derlemek ve kendi dağıtımını oluşturmak farklı kapsam ve zorluk düzeyleridir."
+    ],
+    "short_student_text": "Kaynak koda erişmek, kitapta anlatılan süreç veya bellek yönetimi kavramlarının somut uygulamalarını inceleme olanağı verir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.11 Free and Open-Source Operating Systems",
+      "pdf_pages": [
+        74,
+        79
+      ],
+      "printed_pages": [
+        46,
+        51
+      ]
+    },
+    "image_sha256": "c5228de0deeaf3b297300682f56af74f1c8f1ab0034fcf06668cbdfc27005158"
+  },
+  {
+    "slide": 71,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 71,
+    "source_slide_label": "1.71",
+    "topic": "Çekirdek Veri Yapısı",
+    "student_paragraphs": [
+      "İşletim sistemi süreçleri, açık dosyaları ve boş alanları izlemek için bilgiyi düzenlemek zorundadır. Son bölümde bunun için kullanılan liste, ağaç, hash tablosu ve bitmap yapılarını tanıyacağız. Amaç veri yapılarının bütün kodunu öğrenmek değil, arama ve güncelleme ihtiyacına göre neden farklı yapıların seçildiğini anlamaktır."
+    ],
+    "short_student_text": "İşletim sistemi süreçleri, açık dosyaları ve boş alanları izlemek için bilgiyi düzenlemek zorundadır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.9.1 Lists, Stacks, and Queues",
+      "pdf_pages": [
+        64,
+        66
+      ],
+      "printed_pages": [
+        36,
+        38
+      ]
+    },
+    "image_sha256": "268774b52b9cb2c4773229df04bfd6bb66c5c70f61e161f9c318cb19d610829e"
+  },
+  {
+    "slide": 72,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 72,
+    "source_slide_label": "1.72",
+    "topic": "Çekirdek Veri Yapıları",
+    "student_paragraphs": [
+      "Bir listedeki kutular düğümleri, oklar ise bir sonraki veya önceki düğüme ulaşmayı sağlayan bağlantıları gösterir. Tek bağlantılı listede ileri doğru gidilir; son düğümdeki null işareti devam edecek düğüm olmadığını belirtir. Çift bağlantılı listede önceki düğüme dönmek için ek bağlantı bulunur.",
+      "Dairesel listede son düğüm yeniden başa bağlanır. Bu yüzden dolaşırken 'null gördüğünde dur' kuralı yeterli değildir; başlangıca dönüş veya düğüm sayısı gibi bir durma ölçütü gerekir. Teknik olarak düğümler bellekte yan yana bulunmak zorunda değildir. İşletim sistemi benzer yapılarla bekleyen işleri veya kaynak kayıtlarını bağlayabilir; şekil bunun için kullanılan bağlantı mantığını gösterir."
+    ],
+    "short_student_text": "Bir listedeki kutular düğümleri, oklar ise bir sonraki veya önceki düğüme ulaşmayı sağlayan bağlantıları gösterir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.9.1 Lists, Stacks, and Queues",
+      "pdf_pages": [
+        64,
+        66
+      ],
+      "printed_pages": [
+        36,
+        38
+      ]
+    },
+    "image_sha256": "43b608f3ab1da2b573ac125d7b921e9adf560e6619c771f6a8cf6d9564517c4a"
+  },
+  {
+    "slide": 73,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 73,
+    "source_slide_label": "1.73",
+    "topic": "Çekirdek Veri Yapıları",
+    "student_paragraphs": [
+      "İkili arama ağacındaki temel kural, bir düğümün sol alt ağacında daha küçük, sağ alt ağacında daha büyük anahtarların yer almasıdır; eşit anahtarların nereye konacağı ayrıca belirlenen politikaya bağlıdır. Slayttaki 'left <= right' ifadesi tek başına bu tam kuralı anlatmaz. Şekilde kök 17’dir; solunda 12, sağında 35 bulunur.",
+      "14’ü ararken önce 17 ile karşılaştırırız. Daha küçük olduğu için sola, 12’den büyük olduğu için sağa ilerler ve 14’e ulaşırız. Böylece uygun dalları seçerek bütün düğümleri sırayla kontrol etmeyebiliriz. Ağaç dengeliyse arama yüksekliği yaklaşık logaritmik büyür. Çok dengesiz ağaç bir zincire benzeyebilir ve arama en kötü durumda n düğüme kadar uzayabilir. O(n) ve O(log n) gösterimleri büyüme eğilimini anlatır; saniye cinsinden süre değildir."
+    ],
+    "short_student_text": "İkili arama ağacındaki temel kural, bir düğümün sol alt ağacında daha küçük, sağ alt ağacında daha büyük anahtarların yer almasıdır; eşit anahtarların nereye konacağı ayrıca belirlenen politikaya bağlıdır.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.9.2 Trees",
+      "pdf_pages": [
+        66,
+        67
+      ],
+      "printed_pages": [
+        38,
+        39
+      ]
+    },
+    "image_sha256": "b5ae35ddb8d9d45f3118d84cb2414fa0de214a46e0ad5b38f745722e0e44554b"
+  },
+  {
+    "slide": 74,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 74,
+    "source_slide_label": "1.74",
+    "topic": "Çekirdek Veri Yapıları",
+    "student_paragraphs": [
+      "Üstteki şekilde bir anahtar hash fonksiyonuna verilir ve tablodaki bir konuma eşlenir. Aşağı yönlü ok, anahtardan uygun kayıt yerine ulaşma fikrini gösterir. Farklı anahtarlar aynı konuma eşlenebilir; buna çakışma denir ve ek bir çözüm gerekir. Bu nedenle hash tablosu her koşulda tek adımda kesin sonuç verir dememeliyiz.",
+      "Bitmap’te her bit bir öğenin iki durumundan birini temsil eder. Örneğin 1 dolu, 0 boş diye tanımlanırsa 1010 dizisi dört alanın durumunu gösterir. Hangi bit değerinin hangi anlamı taşıdığı kullanılan kurala bağlıdır. Slayt sonunda verilen başlık dosyası adları kod satırı değil, Linux veri yapılarını incelemek için yol örnekleridir. Bu hafta bunları derlemek veya ezberlemek gerekmez."
+    ],
+    "short_student_text": "Üstteki şekilde bir anahtar hash fonksiyonuna verilir ve tablodaki bir konuma eşlenir.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.9.3 Hash Functions and Maps; 1.9.4 Bitmaps",
+      "pdf_pages": [
+        66,
+        68
+      ],
+      "printed_pages": [
+        38,
+        40
+      ]
+    },
+    "image_sha256": "c38cb3c813e6dd4734c7f4c311cf87d35b97355d8084706ce4c036fb708761d4"
+  },
+  {
+    "slide": 75,
+    "source_pdf": "Sunum.pdf",
+    "source_page": 75,
+    "source_slide_label": null,
+    "topic": "Bölüm 1'in Sonu",
+    "student_paragraphs": [
+      "Bu bölümde işletim sistemini kaynak yönetimi, kontrollü hizmet sunumu ve donanımla etkileşim çerçevesinde ele aldık. Bir dosya okuma örneği üzerinden uygulama, çekirdek, bellek, aygıt ve kesme ilişkisini yeniden kurabiliyorsanız temel çerçeve oluşmuş demektir.",
+      "Ders sonrası etkinlikte bu ilişkiyi kendi cümlelerinizle açıklayın. Süreç, çalışma modu, önbellek ve sanal makine kavramlarını birbirine karıştırmadan kullanmaya dikkat edin. Sonraki haftaların ayrıntılarını bu genel resimdeki yerlerine yerleştirerek öğrenmek, tek tek tanımları ezberlemekten daha kalıcı olacaktır."
+    ],
+    "short_student_text": "Bu bölümde işletim sistemini kaynak yönetimi, kontrollü hizmet sunumu ve donanımla etkileşim çerçevesinde ele aldık.",
+    "reading": {
+      "file": "Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf",
+      "section": "1.12 Summary",
+      "pdf_pages": [
+        79,
+        80
+      ],
+      "printed_pages": [
+        51,
+        52
+      ]
+    },
+    "image_sha256": "231692e1df34d72f4e118183194618567b0179ff6c863daf9dcde6196b49e5a4"
+  }
+]
