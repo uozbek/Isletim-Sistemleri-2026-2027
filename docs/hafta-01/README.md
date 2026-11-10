@@ -1,5 +1,5 @@
 # 1. Hafta · İşletim Sistemlerine Giriş
 
 - [Ders notları](index.html)
-- [Kısa sunum metinleri](Kisa_Sunum_Metinleri.html)
+- [Ek okuma kaynağı](index.html#ek-kaynaklar)
 - [Kaynak okuma rehberi](KAYNAK_OKUMA_REHBERI.md)
