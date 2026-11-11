@@ -53,7 +53,7 @@
 
     .week {
       display: grid;
-      grid-template-columns: 48px minmax(0, 1fr) 155px;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
       align-items: center;
       gap: 22px;
       padding: 25px 0;
@@ -68,8 +68,13 @@
     h3 a, footer a { text-decoration: none; }
     h3 a:hover, footer a:hover { text-decoration: underline; color: var(--accent); }
     .description { margin: 0; color: var(--muted); font-size: 13px; }
-    .notes {
+    .week-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       justify-self: end;
+    }
+    .notes {
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -101,7 +106,7 @@
       .week { grid-template-columns: 30px minmax(0, 1fr); gap: 10px 16px; padding: 22px 0; }
       .number { align-self: start; font-size: 21px; }
       h3 { font-size: 18px; }
-      .notes { grid-column: 2; justify-self: start; }
+      .week-links { grid-column: 2; justify-self: start; }
       footer { flex-direction: column; gap: 5px; }
     }
 
@@ -109,7 +114,7 @@
       body { background: #fff; }
       .hero { padding: 20px 0; }
       .week { grid-template-columns: 40px minmax(0, 1fr); break-inside: avoid; padding: 14px 0; }
-      .notes, footer { display: none; }
+      .week-links, footer { display: none; }
     }
   </style>
 </head>
@@ -138,7 +143,10 @@
             <h3><a href="hafta-01/index.html">İşletim Sistemlerine Giriş</a></h3>
             <p class="description">İşletim sisteminin rolü, donanımla ilişkisi ve temel kavramlar.</p>
           </div>
-          <a class="notes" href="hafta-01/index.html" aria-label="1. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-01/index.html" aria-label="1. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-01/index.html#kaynaklar" aria-label="1. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
 
         <article class="week">
@@ -147,7 +155,10 @@
             <h3><a href="hafta-02/index.html">İşletim Sistemi Hizmetleri</a></h3>
             <p class="description">Sistem çağrıları, işletim sistemi hizmetleri ve sistem yapısı.</p>
           </div>
-          <a class="notes" href="hafta-02/index.html" aria-label="2. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-02/index.html" aria-label="2. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-02/index.html#kaynaklar" aria-label="2. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
 
         <article class="week">
@@ -156,7 +167,10 @@
             <h3><a href="hafta-03/index.html">Süreçler ve IPC</a></h3>
             <p class="description">Süreç yaşam döngüsü, süreç oluşturma ve süreçler arası iletişim.</p>
           </div>
-          <a class="notes" href="hafta-03/index.html" aria-label="3. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-03/index.html" aria-label="3. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-03/index.html#kaynaklar" aria-label="3. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
 
         <article class="week">
@@ -165,7 +179,10 @@
             <h3><a href="hafta-04/index.html">İş Parçacıkları ve Eşzamanlılık</a></h3>
             <p class="description">Çok çekirdekli çalışma, Pthreads ve görev havuzları.</p>
           </div>
-          <a class="notes" href="hafta-04/index.html" aria-label="4. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-04/index.html" aria-label="4. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-04/index.html#kaynaklar" aria-label="4. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
 
         <article class="week">
@@ -174,7 +191,10 @@
             <h3><a href="hafta-05/index.html">CPU Zamanlama</a></h3>
             <p class="description">Zamanlama algoritmaları, Gantt çizelgeleri ve iş parçacığı kapsamı.</p>
           </div>
-          <a class="notes" href="hafta-05/index.html" aria-label="5. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-05/index.html" aria-label="5. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-05/index.html#kaynaklar" aria-label="5. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
 
         <article class="week">
@@ -183,12 +203,15 @@
             <h3><a href="hafta-06/index.html">Proses Senkronizasyonu</a></h3>
             <p class="description">Yarış durumu, kritik bölge, mutex, semafor ve klasik senkronizasyon problemleri.</p>
           </div>
-          <a class="notes" href="hafta-06/index.html" aria-label="6. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+          <div class="week-links">
+            <a class="notes" href="hafta-06/index.html" aria-label="6. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+            <a class="notes" href="hafta-06/index.html#kaynaklar" aria-label="6. hafta kaynakları">Kaynaklar <span aria-hidden="true">↗</span></a>
+          </div>
         </article>
       </section>
 
       <aside class="guide" aria-label="Ders notlarını kullanma">
-        <p>Haftanın ders notlarını açarak slaytları açıklamalarıyla birlikte okuyabilir ve sayfanın sonundaki kaynak rehberine ulaşabilirsiniz.</p>
+        <p>Ders notları, slaytları ve açıklamalarını bir arada gösterir. Kaynaklar düğmesi, haftanın okuma rehberini açar.</p>
       </aside>
     </main>
 
