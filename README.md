@@ -6,3 +6,4 @@ Sakarya Üniversitesi haftalık ders notları.
 - [1. Hafta · İşletim Sistemlerine Giriş](docs/hafta-01/index.html)
 - [2. Hafta · İşletim Sistemi Hizmetleri](docs/hafta-02/index.html)
 - [3. Hafta · Süreçler ve IPC](docs/hafta-03/index.html)
+- [4. Hafta · İş Parçacıkları ve Eşzamanlılık](docs/hafta-04/index.html)
