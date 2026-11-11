@@ -1,3 +1,201 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>İşletim Sistemleri · Ders materyalleri</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f3f7fa;color:#21364a;font:16px/1.65 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:24px}header,section,article{background:#fff;border:1px solid #dce7ee;border-radius:16px;padding:24px;margin:0 0 18px}header{background:#e6eff8;border-color:#d5e3f0}h1,h2,h3{color:#123c67;line-height:1.24}h1{margin:.25em 0;font-size:clamp(1.7rem,4vw,2.45rem)}h2{margin-top:0}h3{font-size:1.08rem}p,li{max-width:76ch}li+li{margin-top:.35em}.tag{font-size:.9rem;font-weight:700;color:#176452;margin:0 0 10px}.slide img{display:block;width:100%;height:auto;border:1px solid #dce7ee;border-radius:8px}.note{padding-top:2px}.source{border-top:1px solid #dce7ee;padding-top:9px;color:#506575;font-size:.9rem}pre{padding:13px 16px;background:#edf3f8;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}a{color:#124b7b}nav ul{display:flex;flex-wrap:wrap;gap:8px 20px;padding:0;list-style:none;margin-bottom:0}nav li{margin:0!important}footer a{display:inline-block;background:#123c67;color:#fff;border-radius:8px;padding:10px 16px}a:focus-visible{outline:3px solid #176452;outline-offset:3px}@media(max-width:560px){main{padding:12px}header,section,article{padding:15px}}
-</style></head><body><main><header><p class="tag">SAKARYA ÜNİVERSİTESİ · 2026–2027</p><h1>İşletim Sistemleri</h1><p>Haftalık ders notları ve kaynak okuma rehberleri</p></header><section><p class="tag">1. HAFTA</p><h2>İşletim Sistemlerine Giriş</h2><p>75 slayt, öğrenci açıklamaları ve kaynak okuma rehberi.</p><p><a href="hafta-01/index.html">Ders notları</a></p></section><section><p class="tag">2. HAFTA</p><h2>İşletim Sistemi Hizmetleri</h2><p>62 slayt, öğrenci açıklamaları ve kaynak okuma rehberi.</p><p><a href="hafta-02/index.html">Ders notları</a></p></section><section><p class="tag">3. HAFTA</p><h2>Süreçler ve IPC</h2><p>İki sunum, 71 slayt, süreç yaşam döngüsü ve süreçler arası iletişim.</p><p><a href="hafta-03/index.html">Ders notları</a></p></section><section><p class="tag">4. HAFTA</p><h2>İş Parçacıkları ve Eşzamanlılık</h2><p>64 slayt, çok çekirdekli çalışma, Pthreads ve görev havuzları.</p><p><a href="hafta-04/index.html">Ders notları</a></p></section><section><p class="tag">5. HAFTA</p><h2>CPU Zamanlama</h2><p>39 slayt, Gantt çizelgeleri, CPU zamanlama algoritmaları ve iş parçacığı kapsamı.</p><p><a href="hafta-05/index.html">Ders notları</a></p></section><section><p class="tag">6. HAFTA</p><h2>Proses Senkronizasyonu</h2><p>74 slayt. Yarış durumu, kritik bölge, mutex, semafor ve klasik senkronizasyon problemleri.</p><p><a href="hafta-06/index.html">Ders notları</a></p></section></main></body></html>
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sakarya Üniversitesi İşletim Sistemleri dersi 2026–2027. Haftalık ders notları ve kaynak okuma rehberleri.">
+  <title>İşletim Sistemleri · 2026–2027</title>
+  <style>
+    :root {
+      --ink: #1b2c38;
+      --muted: #586873;
+      --line: #dfe5e8;
+      --accent: #126557;
+      --paper: #fbfcfb;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: inherit; }
+    a:focus-visible {
+      outline: 3px solid #a16c16;
+      outline-offset: 4px;
+    }
+
+    .wrap { max-width: 1060px; margin: auto; padding: 0 38px; }
+    .top, .section-head, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px;
+    }
+    .top { padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-size: 14px; font-weight: 650; }
+    .year, .count { color: var(--muted); font-size: 13px; }
+
+    .hero { max-width: 740px; padding: 58px 0 44px; }
+    h1 {
+      margin: 0 0 15px;
+      font-size: clamp(36px, 6vw, 54px);
+      font-weight: 650;
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+    .intro { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.75; }
+    .section-head { padding-bottom: 16px; border-bottom: 1px solid var(--ink); }
+    h2 { margin: 0; font-size: 18px; font-weight: 650; }
+
+    .week {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 155px;
+      align-items: center;
+      gap: 22px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .number {
+      color: #586f64;
+      font: 25px/1.2 ui-monospace, SFMono-Regular, monospace;
+      letter-spacing: -.06em;
+    }
+    h3 { margin: 0 0 5px; font-size: 19px; line-height: 1.35; font-weight: 600; }
+    h3 a, footer a { text-decoration: none; }
+    h3 a:hover, footer a:hover { text-decoration: underline; color: var(--accent); }
+    .description { margin: 0; color: var(--muted); font-size: 13px; }
+    .notes {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border: 1px solid #cddbd5;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+    .notes:hover { background: #eaf2ed; border-color: #97b5a7; }
+
+    .guide { padding: 24px 0; }
+    .guide p { margin: 0; color: var(--muted); font-size: 13px; }
+    footer {
+      padding: 22px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 650px) {
+      .wrap { padding: 0 22px; }
+      .top { padding: 22px 0; }
+      .hero { padding: 40px 0 34px; }
+      .intro { font-size: 15px; }
+      .week { grid-template-columns: 30px minmax(0, 1fr); gap: 10px 16px; padding: 22px 0; }
+      .number { align-self: start; font-size: 21px; }
+      h3 { font-size: 18px; }
+      .notes { grid-column: 2; justify-self: start; }
+      footer { flex-direction: column; gap: 5px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .hero { padding: 20px 0; }
+      .week { grid-template-columns: 40px minmax(0, 1fr); break-inside: avoid; padding: 14px 0; }
+      .notes, footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <span class="brand">Sakarya Üniversitesi</span>
+      <span class="year">2026–2027 · Ders materyalleri</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="course-title">
+        <h1 id="course-title">İşletim Sistemleri</h1>
+        <p class="intro">İşletim sistemi hizmetlerinden süreçlerin zamanlanması ve senkronizasyonuna kadar haftalık ders notları.</p>
+      </section>
+
+      <section aria-labelledby="weeks-title">
+        <div class="section-head">
+          <h2 id="weeks-title">Haftalık içerikler</h2>
+          <span class="count">6 hafta</span>
+        </div>
+
+        <article class="week">
+          <div class="number" aria-label="1. hafta">01</div>
+          <div>
+            <h3><a href="hafta-01/index.html">İşletim Sistemlerine Giriş</a></h3>
+            <p class="description">İşletim sisteminin rolü, donanımla ilişkisi ve temel kavramlar.</p>
+          </div>
+          <a class="notes" href="hafta-01/index.html" aria-label="1. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="week">
+          <div class="number" aria-label="2. hafta">02</div>
+          <div>
+            <h3><a href="hafta-02/index.html">İşletim Sistemi Hizmetleri</a></h3>
+            <p class="description">Sistem çağrıları, işletim sistemi hizmetleri ve sistem yapısı.</p>
+          </div>
+          <a class="notes" href="hafta-02/index.html" aria-label="2. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="week">
+          <div class="number" aria-label="3. hafta">03</div>
+          <div>
+            <h3><a href="hafta-03/index.html">Süreçler ve IPC</a></h3>
+            <p class="description">Süreç yaşam döngüsü, süreç oluşturma ve süreçler arası iletişim.</p>
+          </div>
+          <a class="notes" href="hafta-03/index.html" aria-label="3. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="week">
+          <div class="number" aria-label="4. hafta">04</div>
+          <div>
+            <h3><a href="hafta-04/index.html">İş Parçacıkları ve Eşzamanlılık</a></h3>
+            <p class="description">Çok çekirdekli çalışma, Pthreads ve görev havuzları.</p>
+          </div>
+          <a class="notes" href="hafta-04/index.html" aria-label="4. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="week">
+          <div class="number" aria-label="5. hafta">05</div>
+          <div>
+            <h3><a href="hafta-05/index.html">CPU Zamanlama</a></h3>
+            <p class="description">Zamanlama algoritmaları, Gantt çizelgeleri ve iş parçacığı kapsamı.</p>
+          </div>
+          <a class="notes" href="hafta-05/index.html" aria-label="5. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="week">
+          <div class="number" aria-label="6. hafta">06</div>
+          <div>
+            <h3><a href="hafta-06/index.html">Proses Senkronizasyonu</a></h3>
+            <p class="description">Yarış durumu, kritik bölge, mutex, semafor ve klasik senkronizasyon problemleri.</p>
+          </div>
+          <a class="notes" href="hafta-06/index.html" aria-label="6. hafta ders notları">Ders notları <span aria-hidden="true">↗</span></a>
+        </article>
+      </section>
+
+      <aside class="guide" aria-label="Ders notlarını kullanma">
+        <p>Haftanın ders notlarını açarak slaytları açıklamalarıyla birlikte okuyabilir ve sayfanın sonundaki kaynak rehberine ulaşabilirsiniz.</p>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Sakarya Üniversitesi · İşletim Sistemleri</span>
+      <a href="https://github.com/uozbek/Isletim-Sistemleri-2026-2027">GitHub’da görüntüle <span aria-hidden="true">↗</span></a>
+    </footer>
+  </div>
+</body>
+</html>
